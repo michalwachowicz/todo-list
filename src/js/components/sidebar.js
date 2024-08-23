@@ -36,7 +36,7 @@ export default function createSidebar() {
 
     li.classList = "sidebar-nav-list-item";
     li.appendChild(
-      createSidebarButton(element.icon, element.name, element.active)
+      createSidebarButton(element.icon, element.name, "l", element.active)
     );
 
     sidebarMainNav.appendChild(li);
