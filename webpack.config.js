@@ -17,6 +17,7 @@ module.exports = (_, argv) => {
     plugins: [
       new HtmlWebpackPlugin({
         title: "TodoApp",
+        template: "./src/index.html",
       }),
       new MiniCssExtractPlugin({
         filename: "[name].css",
