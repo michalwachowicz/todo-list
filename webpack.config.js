@@ -51,9 +51,16 @@ module.exports = (_, argv) => {
           generator: { filename: "fonts/[name][ext]" },
         },
         {
-          test: /\.(png|svg|jpg|jpeg|gif)$/i,
-          type: "asset/resource",
+          test: /\.(svg)$/i,
           generator: { filename: "images/[name][ext]" },
+          use: [
+            {
+              loader: "svg-inline-loader",
+              options: {
+                removeSVGTagAttrs: false,
+              },
+            },
+          ],
         },
       ],
     },
