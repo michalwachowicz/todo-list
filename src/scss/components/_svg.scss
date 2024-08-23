@@ -1,13 +1,13 @@
 @use "../abstracts/themes" as *;
 
 .svg {
-  &-fill {
+  &-fill path {
     @include themify {
       fill: themed("icon");
     }
   }
 
-  &-stroke {
+  &-stroke path {
     @include themify {
       stroke: themed("icon");
     }
