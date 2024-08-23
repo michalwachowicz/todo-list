@@ -1,5 +1,5 @@
-import lightIcon from "!!raw-loader!../assets/icons/light.svg";
-import darkIcon from "!!raw-loader!../assets/icons/dark.svg";
+import lightIcon from "!!raw-loader!../../assets/icons/light.svg";
+import darkIcon from "!!raw-loader!../../assets/icons/dark.svg";
 
 let currentTheme = "light";
 const themeIcons = {

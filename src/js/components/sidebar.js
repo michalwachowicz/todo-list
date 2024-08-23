@@ -1,5 +1,5 @@
-import theme from "../theme";
-import visibility from "../visibility";
+import theme from "../utils/theme";
+import visibility from "../utils/visibility";
 import createIconButton from "./iconButton";
 
 import sidebarIcon from "!!raw-loader!../../assets/icons/sidebar.svg";
