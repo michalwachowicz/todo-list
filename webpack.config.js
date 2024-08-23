@@ -51,16 +51,8 @@ module.exports = (_, argv) => {
           generator: { filename: "fonts/[name][ext]" },
         },
         {
-          test: /\.(svg)$/i,
-          generator: { filename: "images/[name][ext]" },
-          use: [
-            {
-              loader: "svg-inline-loader",
-              options: {
-                removeSVGTagAttrs: false,
-              },
-            },
-          ],
+          test: /\.svg$/i,
+          use: "raw-loader",
         },
       ],
     },
@@ -82,7 +74,14 @@ module.exports = (_, argv) => {
           minimizer: {
             implementation: ImageMinimizerPlugin.imageminMinify,
             options: {
-              plugins: ["svgo"],
+              plugins: [
+                [
+                  "imagemin-svgo",
+                  {
+                    plugins: [{ removeViewBox: false }, { cleanupIDs: false }],
+                  },
+                ],
+              ],
             },
           },
         }),
