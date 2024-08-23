@@ -11,4 +11,30 @@
     background-color: themed("accent");
     border-right: 1px solid themed("sidebar-border");
   }
+
+  &-header {
+    display: flex;
+    gap: 0.75rem;
+  }
+
+  &-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+
+    @include themify {
+      color: themed("main");
+    }
+  }
+
+  &-projects {
+    &-header {
+      display: flex;
+      justify-content: space-between;
+    }
+
+    &-title {
+      font-size: 1.125rem;
+      font-weight: 700;
+    }
+  }
 }
