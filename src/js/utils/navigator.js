@@ -9,12 +9,31 @@ const createNavItem = (name, icon, dataName = null, active = false) => {
 };
 
 const mainNav = [
-  createNavItem("All tasks", inboxIcon, "all"),
+  createNavItem("All tasks", inboxIcon, "all", true),
   createNavItem("Today", starIcon),
-  createNavItem("Upcomng", calendarIcon),
+  createNavItem("Upcoming", calendarIcon),
 ];
+
+const getActiveItem = () => mainNav.find((item) => item.active);
 
 const activate = (navItem) =>
   mainNav.forEach((item) => (item.active = item == navItem ? true : false));
 
-export default { mainNav, activate };
+const updateNavigationDOM = (btnClass, titleClass) => {
+  const btns = [...document.querySelectorAll(`button.${btnClass}`)];
+  const activeBtn = btns.find((btn) => btn.classList.contains("active"));
+  const activeItem = getActiveItem();
+
+  if (activeBtn && activeBtn.dataset.name == activeItem.dataName) return;
+
+  const targetBtn = btns.find((btn) => btn.dataset.name == activeItem.dataName);
+  if (!targetBtn) return;
+
+  btns.forEach((btn) => btn.classList.remove("active"));
+  targetBtn.classList.add("active");
+
+  const titleElement = document.querySelector(`.${titleClass}`);
+  titleElement.textContent = activeItem.name;
+};
+
+export default { mainNav, activate, updateNavigationDOM };

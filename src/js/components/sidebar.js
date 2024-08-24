@@ -8,13 +8,11 @@ import { hideSidebarBtn } from "./button/sidebarButton";
 import addProjectIcon from "!!raw-loader!../../assets/icons/plus.svg";
 
 const createSidebarButton = (navItem, classList, onClick = null) => {
-  const { name, dataName, icon, active } = navItem;
+  const { name, dataName, icon } = navItem;
   const btn = document.createElement("button");
 
   btn.type = "button";
-  btn.classList = `btn btn-sidebar ${active ? "active" : ""} ${
-    classList || ""
-  }`;
+  btn.classList = `btn btn-sidebar ${classList || ""}`;
   btn.innerHTML = icon + name;
   btn.dataset.name = dataName;
 
@@ -52,6 +50,7 @@ const addMainNavButtons = () => {
   navigator.mainNav.forEach((element) => {
     const btn = createSidebarButton(element, "btn-sidebar-l", () => {
       navigator.activate(element);
+      navigator.updateNavigationDOM("btn-sidebar", "main-title");
     });
 
     nav.appendChild(createNavListItem(btn));
