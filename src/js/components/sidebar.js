@@ -1,14 +1,13 @@
 import theme from "../utils/theme";
-import createIconButton from "./iconButton";
-import { hideSidebarBtn } from "./sidebarButton";
+import createIconButton from "./button/iconButton";
+import { hideSidebarBtn } from "./button/sidebarButton";
 
-import addIcon from "!!raw-loader!../../assets/icons/plus-circle.svg";
 import inboxIcon from "!!raw-loader!../../assets/icons/inbox.svg";
 import starIcon from "!!raw-loader!../../assets/icons/star.svg";
 import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
 import addProjectIcon from "!!raw-loader!../../assets/icons/plus.svg";
+import createAddTaskButton from "./button/addTaskButton";
 
-const addTask = { name: "Add task", icon: addIcon, active: false };
 const mainNav = [
   { name: "All tasks", icon: inboxIcon, active: false },
   { name: "Today", icon: starIcon, active: false },
@@ -51,9 +50,7 @@ export default function createSidebar() {
 
   const sidebarMainNav = document.querySelector(".sidebar-nav-list-main");
   sidebarMainNav.appendChild(
-    createNavListItem(
-      createSidebarButton(addTask, "btn-sidebar-l btn-add-task")
-    )
+    createNavListItem(createAddTaskButton("btn-sidebar btn-sidebar-l"))
   );
 
   mainNav.forEach((element) => {

@@ -1,7 +1,7 @@
-import visibility from "../utils/visibility";
+import visibility from "../../utils/visibility";
 import createIconButton from "./iconButton";
 
-import sidebarIcon from "!!raw-loader!../../assets/icons/sidebar.svg";
+import sidebarIcon from "!!raw-loader!../../../assets/icons/sidebar.svg";
 
 let sidebarBtn;
 const sidebar = document.querySelector(".sidebar");
