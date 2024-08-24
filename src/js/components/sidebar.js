@@ -32,18 +32,20 @@ const createNavListItem = (child) => {
   return li;
 };
 
-export default function createSidebar() {
+const addHeaderIcons = () => {
   const themeBtn = createIconButton(theme.getCurrentThemeIcon(), (e) => {
     theme.switchTheme();
     theme.setThemeDOM(e.target);
   });
   const sidebarBtn = hideSidebarBtn();
 
-  const sidebarHeader = document.querySelector(".sidebar-header");
-  sidebarHeader.append(themeBtn, sidebarBtn);
+  const header = document.querySelector(".sidebar-header");
+  header.append(themeBtn, sidebarBtn);
+};
 
-  const sidebarMainNav = document.querySelector(".sidebar-nav-list-main");
-  sidebarMainNav.appendChild(
+const addMainNavButtons = () => {
+  const nav = document.querySelector(".sidebar-nav-list-main");
+  nav.appendChild(
     createNavListItem(createAddTaskButton("btn-sidebar btn-sidebar-l"))
   );
 
@@ -52,11 +54,19 @@ export default function createSidebar() {
       navigator.activate(element);
     });
 
-    sidebarMainNav.appendChild(createNavListItem(btn));
+    nav.appendChild(createNavListItem(btn));
   });
+};
 
-  const addProjectBtn = createIconButton(addProjectIcon);
-  const projectsHeader = document.querySelector(".sidebar-projects-header");
+const addProjectSection = () => {
+  const btn = createIconButton(addProjectIcon);
+  const header = document.querySelector(".sidebar-projects-header");
 
-  projectsHeader.appendChild(addProjectBtn);
+  header.appendChild(btn);
+};
+
+export default function createSidebar() {
+  addHeaderIcons();
+  addMainNavButtons();
+  addProjectSection();
 }
