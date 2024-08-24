@@ -3,7 +3,7 @@ const hide = (element) => {
 };
 
 const show = (element) => {
-  element.classList.remvoe("hidden");
+  element.classList.remove("hidden");
 };
 
 export default { hide, show };
