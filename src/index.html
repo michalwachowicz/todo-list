@@ -6,6 +6,31 @@
     <title>TodoApp</title>
   </head>
   <body>
+    <dialog id="add-edit-dialog">
+      <form id="add-edit-form">
+        <input
+          type="text"
+          placeholder="Task name"
+          id="name"
+          name="name"
+          required
+        />
+        <textarea
+          name="description"
+          id="description"
+          placeholder="Description"
+        ></textarea>
+        <div class="form-btns-label"></div>
+        <hr />
+        <div class="form-btns-func">
+          <button type="button" id="add-edit-btn-cancel">Cancel</button>
+          <button type="submit" class="btn btn-func btn-func-primary">
+            Add task
+          </button>
+        </div>
+      </form>
+    </dialog>
+
     <div class="container">
       <main class="main">
         <div class="main-header"></div>
