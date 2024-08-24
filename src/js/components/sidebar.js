@@ -1,7 +1,6 @@
 import theme from "../utils/theme";
 import visibility from "../utils/visibility";
 import createIconButton from "./iconButton";
-import createSidebarButton from "./sidebarButton";
 
 import sidebarIcon from "!!raw-loader!../../assets/icons/sidebar.svg";
 import addIcon from "!!raw-loader!../../assets/icons/plus-circle.svg";
@@ -9,12 +8,36 @@ import inboxIcon from "!!raw-loader!../../assets/icons/inbox.svg";
 import starIcon from "!!raw-loader!../../assets/icons/star.svg";
 import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
 
+const addTask = { name: "Add task", icon: addIcon, active: false };
 const mainNav = [
-  { name: "Add task", icon: addIcon, active: false },
   { name: "All tasks", icon: inboxIcon, active: false },
   { name: "Today", icon: starIcon, active: false },
   { name: "Upcoming", icon: calendarIcon, active: false },
 ];
+
+const createSidebarButton = (navItem, classList, onClick = null) => {
+  const { name, icon, active } = navItem;
+  const btn = document.createElement("button");
+
+  btn.type = "button";
+  btn.classList = `btn btn-sidebar ${active ? "active" : ""} ${
+    classList || ""
+  }`;
+  btn.innerHTML = icon + name;
+
+  if (onClick) btn.addEventListener("click", onClick);
+
+  return btn;
+};
+
+const createNavListItem = (child) => {
+  const li = document.createElement("li");
+
+  li.classList = "sidebar-nav-list-item";
+  li.appendChild(child);
+
+  return li;
+};
 
 export default function createSidebar() {
   const sidebar = document.querySelector(".sidebar");
@@ -31,14 +54,14 @@ export default function createSidebar() {
   sidebarHeader.append(themeBtn, sidebarBtn);
 
   const sidebarMainNav = document.querySelector(".sidebar-nav-list-main");
+  sidebarMainNav.appendChild(
+    createNavListItem(
+      createSidebarButton(addTask, "btn-sidebar-l btn-add-task")
+    )
+  );
+
   mainNav.forEach((element) => {
-    const li = document.createElement("li");
-
-    li.classList = "sidebar-nav-list-item";
-    li.appendChild(
-      createSidebarButton(element.icon, element.name, "l", element.active)
-    );
-
-    sidebarMainNav.appendChild(li);
+    const btn = createSidebarButton(element, "btn-sidebar-l");
+    sidebarMainNav.appendChild(createNavListItem(btn));
   });
 }
