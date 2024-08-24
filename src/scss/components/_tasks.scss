@@ -48,6 +48,26 @@
       min-width: 1rem;
       min-height: 1rem;
     }
+
+    @mixin set-color($color) {
+      color: $color;
+
+      .svg-fill path {
+        fill: $color;
+      }
+
+      .svg-stroke path {
+        stroke: $color;
+      }
+    }
+
+    &-incoming {
+      @include set-color(#15803d);
+    }
+
+    &-overdue {
+      @include set-color(#b91c1c);
+    }
   }
 
   &-project {
