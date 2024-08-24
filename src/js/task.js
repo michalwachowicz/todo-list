@@ -106,4 +106,8 @@ const renderTasks = (container, filter = (task) => task) => {
   });
 };
 
-export { renderTasks };
+const addTask = (task) => {
+  tasks.push(task);
+};
+
+export { renderTasks, addTask, createTask };

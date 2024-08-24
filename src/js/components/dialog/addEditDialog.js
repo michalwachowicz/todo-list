@@ -1,3 +1,6 @@
+import navigator from "../../utils/navigator";
+import { addTask, createTask, renderTasks } from "../../task";
+
 const dialog = document.querySelector("dialog#add-edit-dialog");
 const form = document.querySelector("form#add-edit-form");
 
@@ -22,5 +25,19 @@ const openDialog = (task = null) => {
 const closeDialog = () => {
   dialog.close();
 };
+
+cancelBtn.addEventListener("click", closeDialog);
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  addTask(
+    createTask(5, nameInput.value, descriptionInput.value || null, null, null)
+  );
+  renderTasks(
+    document.querySelector(".task-list"),
+    navigator.getActiveItem().filter
+  );
+  closeDialog();
+});
 
 export default { openDialog, closeDialog };

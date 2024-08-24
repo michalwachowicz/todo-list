@@ -36,4 +36,4 @@ const updateNavigationDOM = (btnClass, titleClass) => {
   titleElement.textContent = activeItem.name;
 };
 
-export default { mainNav, activate, updateNavigationDOM };
+export default { mainNav, getActiveItem, activate, updateNavigationDOM };
