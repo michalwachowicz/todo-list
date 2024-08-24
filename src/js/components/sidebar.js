@@ -1,21 +1,14 @@
 import theme from "../utils/theme";
 import createIconButton from "./button/iconButton";
-import { hideSidebarBtn } from "./button/sidebarButton";
-
-import inboxIcon from "!!raw-loader!../../assets/icons/inbox.svg";
-import starIcon from "!!raw-loader!../../assets/icons/star.svg";
-import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
-import addProjectIcon from "!!raw-loader!../../assets/icons/plus.svg";
 import createAddTaskButton from "./button/addTaskButton";
 
-const mainNav = [
-  { name: "All tasks", icon: inboxIcon, active: false },
-  { name: "Today", icon: starIcon, active: false },
-  { name: "Upcoming", icon: calendarIcon, active: false },
-];
+import { hideSidebarBtn } from "./button/sidebarButton";
+import { mainNav } from "../utils/navigator";
+
+import addProjectIcon from "!!raw-loader!../../assets/icons/plus.svg";
 
 const createSidebarButton = (navItem, classList, onClick = null) => {
-  const { name, icon, active } = navItem;
+  const { name, dataName, icon, active } = navItem;
   const btn = document.createElement("button");
 
   btn.type = "button";
@@ -23,6 +16,7 @@ const createSidebarButton = (navItem, classList, onClick = null) => {
     classList || ""
   }`;
   btn.innerHTML = icon + name;
+  btn.dataset.name = dataName;
 
   if (onClick) btn.addEventListener("click", onClick);
 
