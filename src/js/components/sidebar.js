@@ -7,6 +7,7 @@ import addIcon from "!!raw-loader!../../assets/icons/plus-circle.svg";
 import inboxIcon from "!!raw-loader!../../assets/icons/inbox.svg";
 import starIcon from "!!raw-loader!../../assets/icons/star.svg";
 import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
+import addProjectIcon from "!!raw-loader!../../assets/icons/plus.svg";
 
 const addTask = { name: "Add task", icon: addIcon, active: false };
 const mainNav = [
@@ -64,4 +65,9 @@ export default function createSidebar() {
     const btn = createSidebarButton(element, "btn-sidebar-l");
     sidebarMainNav.appendChild(createNavListItem(btn));
   });
+
+  const addProjectBtn = createIconButton(addProjectIcon);
+  const projectsHeader = document.querySelector(".sidebar-projects-header");
+
+  projectsHeader.appendChild(addProjectBtn);
 }
