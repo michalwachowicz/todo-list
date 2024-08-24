@@ -53,11 +53,11 @@
       color: $color;
 
       .svg-fill path {
-        fill: $color;
+        fill: $color !important;
       }
 
       .svg-stroke path {
-        stroke: $color;
+        stroke: $color !important;
       }
     }
 
