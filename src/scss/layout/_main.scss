@@ -4,6 +4,19 @@
   &-title {
     font-size: 3rem;
     font-weight: 700;
+
+    &-container {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+
+    &-project {
+      width: 1.5rem;
+      height: 1.5rem;
+      border-radius: 50%;
+      // background-color: red; // Set background-color using JS
+    }
   }
 
   &-header {
