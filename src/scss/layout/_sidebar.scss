@@ -1,15 +1,20 @@
 @use "../abstracts/themes" as *;
 
 .sidebar {
-  display: flex;
-  flex-direction: column;
   flex: 0 1 256px;
-  gap: 4rem;
   padding: 1rem;
 
   @include themify {
     background-color: themed("accent");
     border-right: 1px solid themed("sidebar-border");
+  }
+
+  &-content {
+    position: sticky;
+    top: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
   }
 
   &-header {
