@@ -13,6 +13,14 @@
     }
   }
 
+  &-add-task {
+    font-weight: 700;
+
+    @include themify {
+      color: themed("main");
+    }
+  }
+
   &-sidebar {
     display: flex;
     align-items: center;
