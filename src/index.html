@@ -6,8 +6,8 @@
     <title>TodoApp</title>
   </head>
   <body>
-    <dialog id="add-edit-dialog">
-      <form id="add-edit-form">
+    <dialog class="dialog dialog-s" id="add-edit-dialog">
+      <form class="form" id="add-edit-form">
         <input
           type="text"
           placeholder="Task name"
@@ -23,7 +23,13 @@
         <div class="form-btns-label"></div>
         <hr />
         <div class="form-btns-func">
-          <button type="button" id="add-edit-btn-cancel">Cancel</button>
+          <button
+            type="button"
+            class="btn btn-func btn-func-secondary"
+            id="add-edit-btn-cancel"
+          >
+            Cancel
+          </button>
           <button type="submit" class="btn btn-func btn-func-primary">
             Add task
           </button>
