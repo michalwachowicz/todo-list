@@ -1,4 +1,5 @@
 import createIconButton from "./components/button/iconButton";
+import formatDate from "./utils/date";
 
 import calendarIcon from "!!raw-loader!../assets/icons/calendar.svg";
 import editIcon from "!!raw-loader!../assets/icons/edit.svg";
@@ -51,8 +52,11 @@ const renderTask = (task) => {
 
   if (task.dueDate) {
     const date = document.createElement("div");
-    date.classList = "task-date";
-    date.innerHTML = calendarIcon + task.dueDate;
+    const fDate = formatDate(task.dueDate);
+
+    date.classList = `task-date task-date-${fDate.dateClass}`;
+    date.innerHTML = calendarIcon + fDate.formattedDate;
+
     info.appendChild(date);
   }
 
