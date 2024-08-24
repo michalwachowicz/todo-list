@@ -34,6 +34,26 @@
     }
   }
 
+  &-func {
+    border-radius: 0.5rem;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+
+    &-primary {
+      @include themify {
+        color: #fff;
+        background-color: themed("main");
+      }
+    }
+
+    &-secondary {
+      @include themify {
+        color: themed("text-main");
+        background-color: themed("accent");
+      }
+    }
+  }
+
   &-check {
     position: relative;
     width: 2rem;
