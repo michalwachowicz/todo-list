@@ -1,9 +1,9 @@
 import theme from "../utils/theme";
+import navigator from "../utils/navigator";
 import createIconButton from "./button/iconButton";
 import createAddTaskButton from "./button/addTaskButton";
 
 import { hideSidebarBtn } from "./button/sidebarButton";
-import { mainNav } from "../utils/navigator";
 
 import addProjectIcon from "!!raw-loader!../../assets/icons/plus.svg";
 
@@ -47,8 +47,11 @@ export default function createSidebar() {
     createNavListItem(createAddTaskButton("btn-sidebar btn-sidebar-l"))
   );
 
-  mainNav.forEach((element) => {
-    const btn = createSidebarButton(element, "btn-sidebar-l");
+  navigator.mainNav.forEach((element) => {
+    const btn = createSidebarButton(element, "btn-sidebar-l", () => {
+      navigator.activate(element);
+    });
+
     sidebarMainNav.appendChild(createNavListItem(btn));
   });
 

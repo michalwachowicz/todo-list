@@ -14,4 +14,7 @@ const mainNav = [
   createNavItem("Upcomng", calendarIcon),
 ];
 
-export { mainNav };
+const activate = (navItem) =>
+  mainNav.forEach((item) => (item.active = item == navItem ? true : false));
+
+export default { mainNav, activate };
