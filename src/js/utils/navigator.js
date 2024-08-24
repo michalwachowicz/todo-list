@@ -2,16 +2,16 @@ import inboxIcon from "!!raw-loader!../../assets/icons/inbox.svg";
 import starIcon from "!!raw-loader!../../assets/icons/star.svg";
 import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
 
-const createNavItem = (name, icon, dataName = null, active = false) => {
+const createNavItem = (name, icon, dataName, active, filter) => {
   if (dataName == null) dataName = name.toLowerCase();
 
-  return { name, dataName, icon, active };
+  return { name, dataName, icon, active, filter };
 };
 
 const mainNav = [
-  createNavItem("All tasks", inboxIcon, "all", true),
-  createNavItem("Today", starIcon),
-  createNavItem("Upcoming", calendarIcon),
+  createNavItem("All tasks", inboxIcon, "all", true, (task) => task),
+  createNavItem("Today", starIcon, null, false, (task) => task),
+  createNavItem("Upcoming", calendarIcon, null, false, (task) => task),
 ];
 
 const getActiveItem = () => mainNav.find((item) => item.active);
