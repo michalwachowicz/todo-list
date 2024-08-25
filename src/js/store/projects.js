@@ -19,7 +19,7 @@ const renderProjects = (container) => {
     btn.classList = "btn btn-sidebar btn-sidebar-s btn-project";
 
     const color = document.createElement("div");
-    color.classList = "btn-project-color";
+    color.classList = "project-color project-color-s";
     color.style.backgroundColor = project.color;
 
     btn.appendChild(color);

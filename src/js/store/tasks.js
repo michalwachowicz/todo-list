@@ -80,7 +80,7 @@ const renderTask = (task) => {
 
   if (task.project) {
     const projectColor = document.createElement("div");
-    projectColor.classList = "task-project-color";
+    projectColor.classList = "project-color project-color-s";
     projectColor.style.backgroundColor = task.project.color;
     project.append(projectColor);
   }

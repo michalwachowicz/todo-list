@@ -1,0 +1,9 @@
+@use "../abstracts/mixins" as *;
+
+.project {
+  &-color {
+    &-s {
+      @include circle(0.75rem);
+    }
+  }
+}
