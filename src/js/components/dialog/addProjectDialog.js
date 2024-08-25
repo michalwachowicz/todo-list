@@ -8,9 +8,12 @@ const form = document.querySelector("form#add-project-form");
 const colorPicker = form.querySelector('label[for="color"]');
 const colorPickerInput = form.querySelector("#color");
 const colorPickerPopup = form.querySelector(".form-color-popup");
+
 const cancelBtn = form.querySelector("button.btn-cancel");
+const submitBtn = form.querySelector('button[type="submit"]');
 
 const projectName = form.querySelector("#project-name");
+const error = form.querySelector(".form-error");
 
 let pickerOpen = false;
 const colors = [
@@ -117,6 +120,19 @@ form.addEventListener("submit", (e) => {
   );
 
   closeDialog();
+});
+
+projectName.addEventListener("input", (e) => {
+  const text = e.target.value;
+
+  if (navigator.exists(text)) {
+    error.textContent = "A project with this name already exists";
+    error.classList.remove("hidden");
+    submitBtn.disabled = true;
+  } else {
+    error.classList.add("hidden");
+    submitBtn.disabled = false;
+  }
 });
 
 export default { openDialog };

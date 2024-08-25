@@ -27,6 +27,9 @@ const activate = (navItem) => {
   fullNav.forEach((item) => (item.active = item == navItem ? true : false));
 };
 
+const exists = (title) =>
+  !!fullNav.find((i) => i.name.toLowerCase() == title.toLowerCase());
+
 const updateNavigationDOM = () => {
   const btns = [...document.querySelectorAll(`button.btn-sidebar`)];
   const activeBtn = btns.find((btn) => btn.classList.contains("active"));
@@ -58,5 +61,6 @@ export default {
   getActiveItem,
   activate,
   updateFullNav,
+  exists,
   updateNavigationDOM,
 };
