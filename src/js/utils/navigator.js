@@ -3,16 +3,16 @@ import starIcon from "!!raw-loader!../../assets/icons/star.svg";
 import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
 import projects from "../store/projects";
 
-const createNavItem = (name, icon, dataName, active, filter) => {
-  if (dataName == null) dataName = name.toLowerCase();
+const createNavItem = (name, icon, active, filter) => {
+  if (dataName == null) dataName = name.replace(" ", "_").toLowerCase();
 
   return { name, dataName, icon, active, filter };
 };
 
 const mainNav = [
-  createNavItem("All tasks", inboxIcon, "all", true, (task) => task),
-  createNavItem("Today", starIcon, null, false, (task) => task),
-  createNavItem("Upcoming", calendarIcon, null, false, (task) => task),
+  createNavItem("All tasks", inboxIcon, true, (task) => task),
+  createNavItem("Today", starIcon, false, (task) => task),
+  createNavItem("Upcoming", calendarIcon, false, (task) => task),
 ];
 let fullNav = [];
 
