@@ -136,4 +136,4 @@ addTask(createTask("Do the dishes", null, new Date(), null, 2));
 addTask(createTask("Buy milk and cigarettes", null, new Date(), null, 3));
 addTask(createTask("Run 1 kilometer", null, new Date()));
 
-export { addTask, createTask, updateTask, renderTasks };
+export default { addTask, createTask, updateTask, renderTasks };

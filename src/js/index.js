@@ -2,9 +2,10 @@ import "../scss/index.scss";
 import createMainSection from "./components/main";
 import createSidebar from "./components/sidebar";
 import navigator from "./utils/navigator";
-import { renderTasks } from "./task";
+import tasks from "./tasks";
 
 createSidebar();
 createMainSection();
+
 navigator.updateNavigationDOM("btn-sidebar", "main-title");
-renderTasks(document.querySelector(".task-list"));
+tasks.renderTasks(document.querySelector(".task-list"));

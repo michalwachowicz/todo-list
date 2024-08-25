@@ -1,3 +1,4 @@
+import tasks from "../tasks";
 import theme from "../utils/theme";
 import navigator from "../utils/navigator";
 import createIconButton from "./button/iconButton";
@@ -6,7 +7,6 @@ import createAddTaskButton from "./button/addTaskButton";
 import { hideSidebarBtn } from "./button/sidebarButton";
 
 import addProjectIcon from "!!raw-loader!../../assets/icons/plus.svg";
-import { renderTasks } from "../task";
 
 const createSidebarButton = (navItem, classList, onClick = null) => {
   const { name, dataName, icon } = navItem;
@@ -52,7 +52,7 @@ const addMainNavButtons = () => {
     const btn = createSidebarButton(element, "btn-sidebar-l", () => {
       navigator.activate(element);
       navigator.updateNavigationDOM("btn-sidebar", "main-title");
-      renderTasks(document.querySelector(".task-list"));
+      tasks.renderTasks(document.querySelector(".task-list"));
     });
 
     nav.appendChild(createNavListItem(btn));

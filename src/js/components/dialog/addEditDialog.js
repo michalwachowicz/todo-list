@@ -1,5 +1,5 @@
 import navigator from "../../utils/navigator";
-import { addTask, createTask, updateTask, renderTasks } from "../../task";
+import tasks from "../../tasks";
 
 const dialog = document.querySelector("dialog#add-edit-dialog");
 const form = document.querySelector("form#add-edit-form");
@@ -30,7 +30,7 @@ cancelBtn.addEventListener("click", closeDialog);
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const task = createTask(
+  const task = tasks.createTask(
     nameInput.value,
     descriptionInput.value || null,
     null,
@@ -38,12 +38,12 @@ form.addEventListener("submit", (e) => {
   );
 
   if (currentTask && currentTask.id !== -1) {
-    updateTask(currentTask.id, task);
+    tasks.updateTask(currentTask.id, task);
   } else {
-    addTask(task);
+    tasks.addTask(task);
   }
 
-  renderTasks(
+  tasks.renderTasks(
     document.querySelector(".task-list"),
     navigator.getActiveItem().filter
   );
