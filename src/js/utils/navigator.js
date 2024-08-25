@@ -1,6 +1,7 @@
 import inboxIcon from "!!raw-loader!../../assets/icons/inbox.svg";
 import starIcon from "!!raw-loader!../../assets/icons/star.svg";
 import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
+import projects from "../store/projects";
 
 const createNavItem = (name, icon, dataName, active, filter) => {
   if (dataName == null) dataName = name.toLowerCase();
@@ -13,11 +14,18 @@ const mainNav = [
   createNavItem("Today", starIcon, null, false, (task) => task),
   createNavItem("Upcoming", calendarIcon, null, false, (task) => task),
 ];
+let fullNav = [];
 
-const getActiveItem = () => mainNav.find((item) => item.active);
+const updateFullNav = () =>
+  (fullNav = [...mainNav, ...projects.getProjects().getList()]);
 
-const activate = (navItem) =>
-  mainNav.forEach((item) => (item.active = item == navItem ? true : false));
+const getActiveItem = () => fullNav.find((item) => item.active);
+
+const activate = (navItem) => {
+  updateFullNav();
+
+  fullNav.forEach((item) => (item.active = item == navItem ? true : false));
+};
 
 const updateNavigationDOM = (btnClass, titleClass) => {
   const btns = [...document.querySelectorAll(`button.${btnClass}`)];
@@ -32,8 +40,15 @@ const updateNavigationDOM = (btnClass, titleClass) => {
   btns.forEach((btn) => btn.classList.remove("active"));
   targetBtn.classList.add("active");
 
+  // Modify for checking if it's a project (contains class btn-project)
   const titleElement = document.querySelector(`.${titleClass}`);
   titleElement.textContent = activeItem.name;
 };
 
-export default { mainNav, getActiveItem, activate, updateNavigationDOM };
+export default {
+  mainNav,
+  getActiveItem,
+  activate,
+  updateFullNav,
+  updateNavigationDOM,
+};

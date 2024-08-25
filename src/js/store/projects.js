@@ -1,3 +1,5 @@
+import navigator from "../utils/navigator";
+import tasks from "./tasks";
 import Store from "./store";
 
 const createProject = (name, color) => {
@@ -15,8 +17,17 @@ const renderProjects = (container) => {
     li.classList = "sidebar-nav-list-item";
 
     const btn = document.createElement("button");
+    btn.dataset.name = project.dataName;
     btn.type = "button";
     btn.classList = "btn btn-sidebar btn-sidebar-s btn-project";
+    btn.addEventListener("click", () => {
+      navigator.activate(project);
+      navigator.updateNavigationDOM("btn-sidebar", "main-title");
+      tasks.renderTasks(
+        document.querySelector(".task-list"),
+        (task) => task.projectId == project.id
+      );
+    });
 
     const color = document.createElement("div");
     color.classList = "project-color project-color-s";

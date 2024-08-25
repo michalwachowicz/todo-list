@@ -7,5 +7,6 @@ import tasks from "./store/tasks";
 createSidebar();
 createMainSection();
 
+navigator.updateFullNav();
 navigator.updateNavigationDOM("btn-sidebar", "main-title");
 tasks.renderTasks(document.querySelector(".task-list"));
