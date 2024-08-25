@@ -43,6 +43,13 @@
         color: #fff;
         background-color: themed("main");
       }
+
+      &:disabled {
+        @include themify {
+          color: themed("text-disabled");
+          background-color: themed("disabled");
+        }
+      }
     }
 
     &-secondary {
