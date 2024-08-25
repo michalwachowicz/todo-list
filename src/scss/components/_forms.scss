@@ -18,6 +18,17 @@
     }
   }
 
+  &-text {
+    font-size: 1.5rem;
+    font-weight: 500;
+  }
+
+  &-color-text-container {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
   &-color-popup {
     position: fixed;
     display: grid;
