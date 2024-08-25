@@ -52,7 +52,7 @@ const addMainNavButtons = () => {
   navigator.mainNav.forEach((element) => {
     const btn = createSidebarButton(element, "btn-sidebar-l", () => {
       navigator.activate(element);
-      navigator.updateNavigationDOM("btn-sidebar", "main-title");
+      navigator.updateNavigationDOM();
       tasks.renderTasks(document.querySelector(".task-list"));
     });
 

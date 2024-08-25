@@ -8,5 +8,6 @@ createSidebar();
 createMainSection();
 
 navigator.updateFullNav();
-navigator.updateNavigationDOM("btn-sidebar", "main-title");
+navigator.updateNavigationDOM();
+
 tasks.renderTasks(document.querySelector(".task-list"));

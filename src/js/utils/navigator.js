@@ -27,8 +27,8 @@ const activate = (navItem) => {
   fullNav.forEach((item) => (item.active = item == navItem ? true : false));
 };
 
-const updateNavigationDOM = (btnClass, titleClass) => {
-  const btns = [...document.querySelectorAll(`button.${btnClass}`)];
+const updateNavigationDOM = () => {
+  const btns = [...document.querySelectorAll(`button.btn-sidebar`)];
   const activeBtn = btns.find((btn) => btn.classList.contains("active"));
   const activeItem = getActiveItem();
 
@@ -49,7 +49,7 @@ const updateNavigationDOM = (btnClass, titleClass) => {
     colorElement.classList.add("hidden");
   }
 
-  const titleElement = document.querySelector(`.${titleClass}`);
+  const titleElement = document.querySelector(`.main-title`);
   titleElement.textContent = activeItem.name;
 };
 
