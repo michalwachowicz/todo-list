@@ -1,4 +1,5 @@
 import tasks from "../store/tasks";
+import projects from "../store/projects";
 import theme from "../utils/theme";
 import navigator from "../utils/navigator";
 import createIconButton from "./button/iconButton";
@@ -64,6 +65,7 @@ const addProjectSection = () => {
   const header = document.querySelector(".sidebar-projects-header");
 
   header.appendChild(btn);
+  projects.renderProjects(document.querySelector(".sidebar-nav-list-projects"));
 };
 
 export default function createSidebar() {
