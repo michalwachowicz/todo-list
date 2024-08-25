@@ -5,6 +5,7 @@ import calendarIcon from "!!raw-loader!../assets/icons/calendar.svg";
 import editIcon from "!!raw-loader!../assets/icons/edit.svg";
 import deleteIcon from "!!raw-loader!../assets/icons/delete.svg";
 import addEditDialog from "./components/dialog/addEditDialog";
+import deleteDialog from "./components/dialog/deleteDialog";
 
 const createTask = (title, description, dueDate, project, priority = 4) => {
   return { title, description, dueDate, project, priority };
@@ -70,7 +71,9 @@ const renderTask = (task) => {
   const editBtn = createIconButton(editIcon, () =>
     addEditDialog.openDialog(task)
   );
-  const deleteBtn = createIconButton(deleteIcon);
+  const deleteBtn = createIconButton(deleteIcon, () => {
+    deleteDialog.openDialog(task.id);
+  });
 
   btns.append(editBtn, deleteBtn);
 
@@ -122,6 +125,14 @@ const updateTask = (id, updatedTask) => {
   }
 };
 
+const deleteTask = (id) => {
+  const index = tasks.findIndex((task) => task.id == id);
+
+  if (index !== -1) {
+    tasks.splice(index, 1);
+  }
+};
+
 updateCurrentTaskId();
 addTask(
   createTask(
@@ -136,4 +147,4 @@ addTask(createTask("Do the dishes", null, new Date(), null, 2));
 addTask(createTask("Buy milk and cigarettes", null, new Date(), null, 3));
 addTask(createTask("Run 1 kilometer", null, new Date()));
 
-export default { addTask, createTask, updateTask, renderTasks };
+export default { addTask, createTask, deleteTask, updateTask, renderTasks };
