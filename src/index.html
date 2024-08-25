@@ -11,6 +11,7 @@
         <input
           type="text"
           placeholder="Task name"
+          class="form-text"
           id="name"
           name="name"
           required
@@ -56,11 +57,31 @@
 
     <dialog class="dialog dialog-s" id="add-project-dialog">
       <form class="form" id="add-project-form">
-        <div class="form-label-container">
-          <label for="color" class="form-color project-color project-color-m">
-            <input type="text" class="hidden" id="color" name="color" />
-          </label>
-          <ul class="form-color-popup hidden"></ul>
+        <div class="form-color-text-container">
+          <div class="form-label-container">
+            <label for="color" class="form-color project-color project-color-m">
+              <input type="text" class="hidden" id="color" name="color" />
+            </label>
+            <ul class="form-color-popup hidden"></ul>
+          </div>
+          <input
+            type="text"
+            class="form-text"
+            id="project-name"
+            placeholder="Project Name"
+          />
+        </div>
+        <hr />
+        <div class="form-btns-func">
+          <button
+            type="button"
+            class="btn btn-func btn-func-secondary btn-cancel"
+          >
+            Cancel
+          </button>
+          <button type="submit" class="btn btn-func btn-func-primary">
+            Add project
+          </button>
         </div>
       </form>
     </dialog>

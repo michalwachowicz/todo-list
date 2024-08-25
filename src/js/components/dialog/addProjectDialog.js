@@ -1,10 +1,16 @@
+import projects from "../../store/projects";
+import tasks from "../../store/tasks";
+import navigator from "../../utils/navigator";
+
 const dialog = document.querySelector("dialog#add-project-dialog");
 const form = document.querySelector("form#add-project-form");
 
 const colorPicker = form.querySelector('label[for="color"]');
 const colorPickerInput = form.querySelector("#color");
 const colorPickerPopup = form.querySelector(".form-color-popup");
-// const cancelBtn = form.querySelector("button.btn-cancel");
+const cancelBtn = form.querySelector("button.btn-cancel");
+
+const projectName = form.querySelector("#project-name");
 
 let pickerOpen = false;
 const colors = [
@@ -24,6 +30,11 @@ const colors = [
 
 const openDialog = () => {
   dialog.showModal();
+};
+
+const closeDialog = () => {
+  closeColorPicker();
+  dialog.close();
 };
 
 const openColorPicker = () => {
@@ -85,6 +96,27 @@ window.addEventListener("click", (e) => {
   ) {
     closeColorPicker();
   }
+});
+
+cancelBtn.addEventListener("click", closeDialog);
+
+form.addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const project = projects.createProject(
+    projectName.value,
+    colorPickerInput.value
+  );
+
+  projects.getProjects().add(project);
+  projects.renderProjects(document.querySelector(".sidebar-nav-list-projects"));
+
+  tasks.renderTasks(
+    document.querySelector(".task-list"),
+    navigator.getActiveItem().filter
+  );
+
+  closeDialog();
 });
 
 export default { openDialog };
