@@ -8,6 +8,7 @@ import createAddTaskButton from "./button/addTaskButton";
 import { hideSidebarBtn } from "./button/sidebarButton";
 
 import addProjectIcon from "!!raw-loader!../../assets/icons/plus.svg";
+import addProjectDialog from "./dialog/addProjectDialog";
 
 const createSidebarButton = (navItem, classList, onClick = null) => {
   const { name, dataName, icon } = navItem;
@@ -61,7 +62,7 @@ const addMainNavButtons = () => {
 };
 
 const addProjectSection = () => {
-  const btn = createIconButton(addProjectIcon);
+  const btn = createIconButton(addProjectIcon, addProjectDialog.openDialog);
   const header = document.querySelector(".sidebar-projects-header");
 
   header.appendChild(btn);

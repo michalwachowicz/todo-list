@@ -18,6 +18,24 @@
     }
   }
 
+  &-color-popup {
+    position: fixed;
+    display: grid;
+    list-style: none;
+    grid-template-columns: repeat(4, auto);
+    border-radius: 1rem;
+    padding: 1rem;
+    gap: 1rem;
+
+    @include themify {
+      background-color: themed("background");
+    }
+  }
+
+  label {
+    cursor: pointer;
+  }
+
   input,
   textarea {
     display: block;
