@@ -12,7 +12,7 @@ const createTask = (title, description, dueDate, project, priority = 4) => {
 };
 
 let currentTaskId = 0;
-const tasks = [];
+const tasks = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
 
 const updateCurrentTaskId = () => {
   tasks.forEach((task) => {
@@ -112,9 +112,15 @@ const renderTasks = (container, filter = (task) => task) => {
   });
 };
 
+const saveTasks = () => {
+  localStorage.tasks = JSON.stringify(tasks);
+};
+
 const addTask = (task) => {
   tasks.push({ ...task, id: task.id || currentTaskId });
   currentTaskId++;
+
+  saveTasks();
 };
 
 const updateTask = (id, updatedTask) => {
@@ -123,6 +129,8 @@ const updateTask = (id, updatedTask) => {
   if (index !== -1) {
     tasks[index] = updatedTask;
   }
+
+  saveTasks();
 };
 
 const deleteTask = (id) => {
@@ -131,6 +139,8 @@ const deleteTask = (id) => {
   if (index !== -1) {
     tasks.splice(index, 1);
   }
+
+  saveTasks();
 };
 
 updateCurrentTaskId();
