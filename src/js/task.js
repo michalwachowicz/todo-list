@@ -5,27 +5,27 @@ import calendarIcon from "!!raw-loader!../assets/icons/calendar.svg";
 import editIcon from "!!raw-loader!../assets/icons/edit.svg";
 import deleteIcon from "!!raw-loader!../assets/icons/delete.svg";
 
-const createTask = (id, title, description, dueDate, project, priority = 4) => {
-  return { title, description, dueDate, project, priority, id };
+const createTask = (title, description, dueDate, project, priority = 4) => {
+  return { title, description, dueDate, project, priority };
 };
 
-const tasks = [
-  createTask(
-    0,
-    "Go rock climbing",
-    "Meet my friends at the rock climbing center",
-    new Date(),
-    null,
-    1
-  ),
-  createTask(1, "Do the dishes", null, new Date(), null, 2),
-  createTask(2, "Buy milk and cigarettes", null, new Date(), null, 3),
-  createTask(3, "Run 1 kilometer", null, new Date()),
-];
+let currentTaskId = 0;
+const tasks = [];
+
+const updateCurrentTaskId = () => {
+  tasks.forEach((task) => {
+    const id = task.id;
+
+    if (id >= currentTaskId) {
+      currentTaskId = id + 1;
+    }
+  });
+};
 
 const renderTask = (task) => {
   const element = document.createElement("li");
   element.classList = "task";
+  element.dataset.id = task.id;
 
   const btn = document.createElement("button");
   btn.type = "button";
@@ -107,7 +107,22 @@ const renderTasks = (container, filter = (task) => task) => {
 };
 
 const addTask = (task) => {
-  tasks.push(task);
+  tasks.push({ ...task, id: task.id || currentTaskId });
+  currentTaskId++;
 };
+
+updateCurrentTaskId();
+addTask(
+  createTask(
+    "Go rock climbing",
+    "Meet my friends at the rock climbing center",
+    new Date(),
+    null,
+    1
+  )
+);
+addTask(createTask("Do the dishes", null, new Date(), null, 2));
+addTask(createTask("Buy milk and cigarettes", null, new Date(), null, 3));
+addTask(createTask("Run 1 kilometer", null, new Date()));
 
 export { renderTasks, addTask, createTask };

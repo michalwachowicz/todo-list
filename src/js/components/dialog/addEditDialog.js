@@ -31,7 +31,7 @@ form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   addTask(
-    createTask(5, nameInput.value, descriptionInput.value || null, null, null)
+    createTask(nameInput.value, descriptionInput.value || null, null, null)
   );
   renderTasks(
     document.querySelector(".task-list"),
