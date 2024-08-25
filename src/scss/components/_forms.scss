@@ -12,6 +12,10 @@
   &-title {
     font-size: 1.5rem;
     font-weight: 500;
+
+    @include themify {
+      color: themed("text-main");
+    }
   }
 
   input,
