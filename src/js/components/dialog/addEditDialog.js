@@ -1,5 +1,5 @@
 import navigator from "../../utils/navigator";
-import tasks from "../../tasks";
+import tasks from "../../store/tasks";
 
 const dialog = document.querySelector("dialog#add-edit-dialog");
 const form = document.querySelector("form#add-edit-form");
@@ -15,8 +15,8 @@ let currentTask = null;
 const openDialog = (task = null) => {
   currentTask = task;
 
-  nameInput.value = task.title || "";
-  descriptionInput.value = task.description || "";
+  nameInput.value = (task && task.title) || "";
+  descriptionInput.value = (task && task.description) || "";
   submitBtn.textContent = task ? "Edit task" : "Add task";
 
   dialog.showModal();
@@ -38,9 +38,9 @@ form.addEventListener("submit", (e) => {
   );
 
   if (currentTask && currentTask.id !== -1) {
-    tasks.updateTask(currentTask.id, task);
+    tasks.getTasks().update(currentTask.id, task);
   } else {
-    tasks.addTask(task);
+    tasks.getTasks().add(task);
   }
 
   tasks.renderTasks(

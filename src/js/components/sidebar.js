@@ -1,4 +1,4 @@
-import tasks from "../tasks";
+import tasks from "../store/tasks";
 import theme from "../utils/theme";
 import navigator from "../utils/navigator";
 import createIconButton from "./button/iconButton";

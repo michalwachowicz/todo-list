@@ -1,4 +1,4 @@
-import tasks from "../../tasks";
+import tasks from "../../store/tasks";
 import navigator from "../../utils/navigator";
 
 const dialog = document.querySelector("dialog#delete-dialog");

@@ -1,28 +1,19 @@
-import createIconButton from "./components/button/iconButton";
-import formatDate from "./utils/date";
+import createIconButton from "../components/button/iconButton";
+import addEditDialog from "../components/dialog/addEditDialog";
+import deleteDialog from "../components/dialog/deleteDialog";
+import formatDate from "../utils/date";
+import Store from "./store";
 
-import calendarIcon from "!!raw-loader!../assets/icons/calendar.svg";
-import editIcon from "!!raw-loader!../assets/icons/edit.svg";
-import deleteIcon from "!!raw-loader!../assets/icons/delete.svg";
-import addEditDialog from "./components/dialog/addEditDialog";
-import deleteDialog from "./components/dialog/deleteDialog";
+import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
+import editIcon from "!!raw-loader!../../assets/icons/edit.svg";
+import deleteIcon from "!!raw-loader!../../assets/icons/delete.svg";
 
 const createTask = (title, description, dueDate, project, priority = 4) => {
   return { title, description, dueDate, project, priority };
 };
 
-let currentTaskId = 0;
-const tasks = localStorage.tasks ? JSON.parse(localStorage.tasks) : [];
-
-const updateCurrentTaskId = () => {
-  tasks.forEach((task) => {
-    const id = task.id;
-
-    if (id >= currentTaskId) {
-      currentTaskId = id + 1;
-    }
-  });
-};
+const tasks = new Store("tasks");
+const getTasks = () => tasks;
 
 const renderTask = (task) => {
   const element = document.createElement("li");
@@ -103,6 +94,7 @@ const renderTask = (task) => {
 
 const renderTasks = (container, filter = (task) => task) => {
   const sorted = tasks
+    .getList()
     .filter(filter)
     .sort((a, b) => a.priority - b.priority || a.dueDate - b.dueDate);
 
@@ -112,37 +104,4 @@ const renderTasks = (container, filter = (task) => task) => {
   });
 };
 
-const saveTasks = () => {
-  localStorage.tasks = JSON.stringify(tasks);
-};
-
-const addTask = (task) => {
-  tasks.push({ ...task, id: task.id || currentTaskId });
-  currentTaskId++;
-
-  saveTasks();
-};
-
-const updateTask = (id, updatedTask) => {
-  const index = tasks.findIndex((task) => task.id == id);
-
-  if (index !== -1) {
-    tasks[index] = updatedTask;
-  }
-
-  saveTasks();
-};
-
-const deleteTask = (id) => {
-  const index = tasks.findIndex((task) => task.id == id);
-
-  if (index !== -1) {
-    tasks.splice(index, 1);
-  }
-
-  saveTasks();
-};
-
-updateCurrentTaskId();
-
-export default { addTask, createTask, deleteTask, updateTask, renderTasks };
+export default { createTask, renderTasks, getTasks };
