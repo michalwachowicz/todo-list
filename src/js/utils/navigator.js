@@ -4,9 +4,13 @@ import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
 import projects from "../store/projects";
 
 const createNavItem = (name, icon, active, filter) => {
-  if (dataName == null) dataName = name.replace(" ", "_").toLowerCase();
-
-  return { name, dataName, icon, active, filter };
+  return {
+    name,
+    dataName: name.replace(" ", "_").toLowerCase(),
+    icon,
+    active,
+    filter,
+  };
 };
 
 const mainNav = [
