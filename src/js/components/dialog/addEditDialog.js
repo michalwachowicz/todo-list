@@ -8,7 +8,7 @@ const nameInput = form.querySelector("#name");
 const descriptionInput = form.querySelector("#description");
 
 const submitBtn = form.querySelector('button[type="submit"]');
-const cancelBtn = form.querySelector("#add-edit-btn-cancel");
+const cancelBtn = form.querySelector(".btn-cancel");
 
 let currentTask = null;
 
