@@ -4,6 +4,7 @@ import formatDate from "./utils/date";
 import calendarIcon from "!!raw-loader!../assets/icons/calendar.svg";
 import editIcon from "!!raw-loader!../assets/icons/edit.svg";
 import deleteIcon from "!!raw-loader!../assets/icons/delete.svg";
+import addEditDialog from "./components/dialog/addEditDialog";
 
 const createTask = (title, description, dueDate, project, priority = 4) => {
   return { title, description, dueDate, project, priority };
@@ -66,7 +67,9 @@ const renderTask = (task) => {
   const btns = document.createElement("div");
   btns.classList = "task-controls-btns";
 
-  const editBtn = createIconButton(editIcon);
+  const editBtn = createIconButton(editIcon, () =>
+    addEditDialog.openDialog(task)
+  );
   const deleteBtn = createIconButton(deleteIcon);
 
   btns.append(editBtn, deleteBtn);
@@ -111,6 +114,14 @@ const addTask = (task) => {
   currentTaskId++;
 };
 
+const updateTask = (id, updatedTask) => {
+  const index = tasks.findIndex((task) => task.id == id);
+
+  if (index !== -1) {
+    tasks[index] = updatedTask;
+  }
+};
+
 updateCurrentTaskId();
 addTask(
   createTask(
@@ -125,4 +136,4 @@ addTask(createTask("Do the dishes", null, new Date(), null, 2));
 addTask(createTask("Buy milk and cigarettes", null, new Date(), null, 3));
 addTask(createTask("Run 1 kilometer", null, new Date()));
 
-export { renderTasks, addTask, createTask };
+export { addTask, createTask, updateTask, renderTasks };
