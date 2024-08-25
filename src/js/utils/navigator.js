@@ -40,7 +40,15 @@ const updateNavigationDOM = (btnClass, titleClass) => {
   btns.forEach((btn) => btn.classList.remove("active"));
   targetBtn.classList.add("active");
 
-  // Modify for checking if it's a project (contains class btn-project)
+  const colorElement = document.querySelector(".main-title-project");
+
+  if (activeItem.color) {
+    colorElement.style.backgroundColor = activeItem.color;
+    colorElement.classList.remove("hidden");
+  } else {
+    colorElement.classList.add("hidden");
+  }
+
   const titleElement = document.querySelector(`.${titleClass}`);
   titleElement.textContent = activeItem.name;
 };
