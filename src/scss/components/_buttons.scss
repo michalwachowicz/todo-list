@@ -1,5 +1,4 @@
-@use "../abstracts/themes" as *;
-@use "../abstracts/functions" as *;
+@use "../abstracts" as *;
 
 .btn {
   cursor: pointer;
@@ -56,10 +55,9 @@
 
   &-check {
     position: relative;
-    width: 2rem;
-    height: 2rem;
-    border-radius: 50%;
     border: 0.2rem solid #d4d4d8;
+
+    @include circle(2rem);
 
     @mixin set-color($color) {
       border-color: $color;
