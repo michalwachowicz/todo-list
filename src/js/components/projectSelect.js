@@ -41,10 +41,7 @@ export default class ProjectSelect extends Select {
   #onClick(e) {
     const btn = e.target;
     const id = btn.dataset.id;
-    const project = projects
-      .getProjects()
-      .getList()
-      .find((p) => p.id == id);
+    const project = projects.find((p) => p.id == id);
 
     this.setCurrentProject(project);
   }
