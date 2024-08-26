@@ -16,6 +16,8 @@ const projectName = form.querySelector("#project-name");
 const error = form.querySelector(".form-error");
 
 let pickerOpen = false;
+let currentProject = null;
+
 const colors = [
   "#dc2626",
   "#ea580c",
@@ -31,7 +33,17 @@ const colors = [
   "#4f46e5",
 ];
 
-const openDialog = () => {
+const openDialog = (project = null) => {
+  currentProject = project;
+
+  const currentColor = (currentColor && currentProject.color) || colors[0];
+
+  colorPicker.style.backgroundColor = currentColor;
+  colorPickerInput.value = currentColor;
+
+  submitBtn.textContent = currentProject ? "Edit project" : "Add project";
+  projectName.value = (currentProject && currentProject.name) || "";
+
   dialog.showModal();
 };
 
@@ -111,7 +123,15 @@ form.addEventListener("submit", (e) => {
     colorPickerInput.value
   );
 
-  projects.getProjects().add(project);
+  if (currentProject && currentProject.id !== -1) {
+    projects
+      .getProjects()
+      .update(currentProject.id, { ...project, id: currentProject.id });
+    navigator.updateNavigationDOM();
+  } else {
+    projects.getProjects().add(project);
+  }
+
   projects.renderProjects(document.querySelector(".sidebar-nav-list-projects"));
 
   tasks.renderTasks(
@@ -125,13 +145,16 @@ form.addEventListener("submit", (e) => {
 projectName.addEventListener("input", (e) => {
   const text = e.target.value;
 
-  if (navigator.exists(text)) {
+  const isCurrentName =
+    currentProject && text.toLowerCase() == currentProject.name.toLowerCase();
+
+  if (!navigator.exists(text) || isCurrentName) {
+    error.classList.add("hidden");
+    submitBtn.disabled = false;
+  } else {
     error.textContent = "A project with this name already exists";
     error.classList.remove("hidden");
     submitBtn.disabled = true;
-  } else {
-    error.classList.add("hidden");
-    submitBtn.disabled = false;
   }
 });
 

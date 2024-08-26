@@ -1,5 +1,6 @@
 import projects from "../store/projects";
 import deleteProjectButton from "../components/button/deleteProjectButton";
+import editProjectButton from "../components/button/editProjectButton";
 
 import inboxIcon from "!!raw-loader!../../assets/icons/inbox.svg";
 import starIcon from "!!raw-loader!../../assets/icons/star.svg";
@@ -56,9 +57,14 @@ const updateNavigationDOM = () => {
   if (activeItem.color) {
     colorElement.style.backgroundColor = activeItem.color;
     colorElement.classList.remove("hidden");
+
     deleteProjectButton.showButton(targetBtn.dataset.id);
+    editProjectButton.showButton(targetBtn.dataset.id);
   } else {
     colorElement.classList.add("hidden");
+
+    deleteProjectButton.hideButton();
+    editProjectButton.hideButton();
   }
 
   const titleElement = document.querySelector(`.main-title`);

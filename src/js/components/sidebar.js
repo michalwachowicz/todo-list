@@ -62,7 +62,9 @@ const addMainNavButtons = () => {
 };
 
 const addProjectSection = () => {
-  const btn = createIconButton(addProjectIcon, addProjectDialog.openDialog);
+  const btn = createIconButton(addProjectIcon, () =>
+    addProjectDialog.openDialog(null)
+  );
   const header = document.querySelector(".sidebar-projects-header");
 
   header.appendChild(btn);
