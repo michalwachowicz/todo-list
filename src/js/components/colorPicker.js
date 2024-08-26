@@ -16,11 +16,8 @@ const COLORS = [
 ];
 
 export default class ColorPicker extends Popup {
-  #input;
-
   constructor(button, popup, input) {
-    super(button, popup, (e) => this.#onClick(e));
-    this.#input = document.querySelector(input);
+    super(button, popup, input, (e) => this.#onClick(e));
 
     COLORS.forEach((color) => {
       const li = document.createElement("li");
@@ -38,7 +35,7 @@ export default class ColorPicker extends Popup {
 
     const color = COLORS[0];
     this.getButton().style.backgroundColor = color;
-    this.#input.value = color;
+    this.getInput().value = color;
   }
 
   #onClick(e) {
@@ -46,14 +43,10 @@ export default class ColorPicker extends Popup {
     if (target.classList.contains("project-color")) {
       const color = target.dataset.color;
 
-      this.#input.value = color;
+      this.getInput().value = color;
       this.getButton().style.backgroundColor = color;
       this.close();
     }
-  }
-
-  getInput() {
-    return this.#input;
   }
 
   updateColor(obj) {

@@ -1,11 +1,13 @@
 export default class Popup {
   #button;
   #popup;
+  #input;
   #isOpen;
 
-  constructor(button, popup, onClick) {
+  constructor(button, popup, input, onClick) {
     this.#button = document.querySelector(button);
     this.#popup = document.querySelector(popup);
+    this.#input = document.querySelector(input);
     this.#isOpen = false;
 
     this.#button.addEventListener("click", (e) => {
@@ -50,5 +52,9 @@ export default class Popup {
 
   getButton() {
     return this.#button;
+  }
+
+  getInput() {
+    return this.#input;
   }
 }
