@@ -36,7 +36,7 @@ const colors = [
 const openDialog = (project = null) => {
   currentProject = project;
 
-  const currentColor = (currentColor && currentProject.color) || colors[0];
+  const currentColor = (currentProject && currentProject.color) || colors[0];
 
   colorPicker.style.backgroundColor = currentColor;
   colorPickerInput.value = currentColor;
