@@ -118,21 +118,27 @@ cancelBtn.addEventListener("click", closeDialog);
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  const project = projects.createProject(
+  let project = projects.createProject(
     projectName.value,
     colorPickerInput.value
   );
 
   if (currentProject && currentProject.id !== -1) {
-    projects
-      .getProjects()
-      .update(currentProject.id, { ...project, id: currentProject.id });
+    project = { ...project, id: currentProject.id };
+
+    projects.getProjects().update(currentProject.id, project);
+    projects.renderProjects(
+      document.querySelector(".sidebar-nav-list-projects")
+    );
+
+    navigator.activate(project);
     navigator.updateNavigationDOM();
   } else {
     projects.getProjects().add(project);
+    projects.renderProjects(
+      document.querySelector(".sidebar-nav-list-projects")
+    );
   }
-
-  projects.renderProjects(document.querySelector(".sidebar-nav-list-projects"));
 
   tasks.renderTasks(
     document.querySelector(".task-list"),
