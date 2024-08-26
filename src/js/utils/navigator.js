@@ -1,7 +1,9 @@
+import projects from "../store/projects";
+import deleteProjectButton from "../components/button/deleteProjectButton";
+
 import inboxIcon from "!!raw-loader!../../assets/icons/inbox.svg";
 import starIcon from "!!raw-loader!../../assets/icons/star.svg";
 import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
-import projects from "../store/projects";
 
 const createNavItem = (name, icon, active, filter) => {
   return {
@@ -28,7 +30,9 @@ const getActiveItem = () => fullNav.find((item) => item.active);
 const activate = (navItem) => {
   updateFullNav();
 
-  fullNav.forEach((item) => (item.active = item == navItem ? true : false));
+  fullNav.forEach(
+    (item) => (item.active = item.dataName == navItem.dataName ? true : false)
+  );
 };
 
 const exists = (title) =>
@@ -52,6 +56,7 @@ const updateNavigationDOM = () => {
   if (activeItem.color) {
     colorElement.style.backgroundColor = activeItem.color;
     colorElement.classList.remove("hidden");
+    deleteProjectButton.showButton(targetBtn.dataset.id);
   } else {
     colorElement.classList.add("hidden");
   }

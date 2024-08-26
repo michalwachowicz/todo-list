@@ -63,7 +63,7 @@ const renderTask = (task) => {
     addEditDialog.openDialog(task)
   );
   const deleteBtn = createIconButton(deleteIcon, () => {
-    deleteDialog.openDialog(task.id);
+    deleteDialog.openDialog({ type: "task", id: task.id });
   });
 
   btns.append(editBtn, deleteBtn);

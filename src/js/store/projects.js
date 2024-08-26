@@ -18,6 +18,7 @@ const renderProjects = (container) => {
 
     const btn = document.createElement("button");
     btn.dataset.name = project.dataName;
+    btn.dataset.id = project.id;
     btn.type = "button";
     btn.classList = "btn btn-sidebar btn-sidebar-s btn-project";
     btn.addEventListener("click", () => {
