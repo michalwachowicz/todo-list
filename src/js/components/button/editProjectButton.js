@@ -1,6 +1,6 @@
 import settingsIcon from "!!raw-loader!../../../assets/icons/settings.svg";
 import projects from "../../store/projects";
-import addProjectDialog from "../dialog/addProjectDialog";
+import addEditProjectDialog from "../dialog/addEditProjectDialog";
 
 const btn = document.querySelector(".btn-project-edit");
 
@@ -20,7 +20,7 @@ const hideButton = () => {
 btn.addEventListener("click", () => {
   const id = btn.dataset.id;
 
-  addProjectDialog.openDialog(
+  addEditProjectDialog.openDialog(
     projects
       .getProjects()
       .getList()
