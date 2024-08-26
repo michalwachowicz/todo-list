@@ -5,6 +5,7 @@ import editProjectButton from "../components/button/editProjectButton";
 import inboxIcon from "!!raw-loader!../../assets/icons/inbox.svg";
 import starIcon from "!!raw-loader!../../assets/icons/star.svg";
 import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
+import { isAfter, isBefore, isToday, startOfToday } from "date-fns";
 
 const createNavItem = (name, icon, active, filter) => {
   return {
@@ -18,8 +19,22 @@ const createNavItem = (name, icon, active, filter) => {
 
 const mainNav = [
   createNavItem("All tasks", inboxIcon, true, (task) => task),
-  createNavItem("Today", starIcon, false, (task) => task),
-  createNavItem("Upcoming", calendarIcon, false, (task) => task),
+  createNavItem(
+    "Today",
+    starIcon,
+    false,
+    (task) =>
+      task.dueDate &&
+      (isToday(task.dueDate) || isBefore(task.dueDate, startOfToday()))
+  ),
+  createNavItem(
+    "Upcoming",
+    calendarIcon,
+    false,
+    (task) =>
+      task.dueDate &&
+      (isToday(task.dueDate) || isAfter(task.dueDate, startOfToday()))
+  ),
 ];
 let fullNav = [];
 
