@@ -1,5 +1,5 @@
-import projectIcon from "!!raw-loader!../../assets/icons/project.svg";
-import projects from "../store/projects";
+import projectIcon from "!!raw-loader!../../../assets/icons/project.svg";
+import projects from "../../store/projects";
 import Select from "./select";
 
 export default class ProjectSelect extends Select {

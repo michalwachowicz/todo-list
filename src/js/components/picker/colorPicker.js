@@ -1,4 +1,4 @@
-import Popup from "./popup";
+import Popup from "../popup";
 
 const COLORS = [
   "#dc2626",

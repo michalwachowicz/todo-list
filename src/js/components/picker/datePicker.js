@@ -1,5 +1,5 @@
-import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
-import formatDate from "../utils/date";
+import calendarIcon from "!!raw-loader!../../../assets/icons/calendar.svg";
+import formatDate from "../../utils/date";
 
 export default class DatePicker {
   #label;

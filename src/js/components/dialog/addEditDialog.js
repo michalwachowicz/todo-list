@@ -1,7 +1,7 @@
 import navigator from "../../utils/navigator";
 import tasks from "../../store/tasks";
-import DatePicker from "../datePicker";
-import ProjectSelect from "../projectSelect";
+import DatePicker from "../picker/datePicker";
+import ProjectSelect from "../select/projectSelect";
 import projects from "../../store/projects";
 
 const dialog = document.querySelector("dialog#add-edit-dialog");

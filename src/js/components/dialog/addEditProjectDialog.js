@@ -1,7 +1,7 @@
 import projects from "../../store/projects";
 import tasks from "../../store/tasks";
 import navigator from "../../utils/navigator";
-import ColorPicker from "../colorPicker";
+import ColorPicker from "../picker/colorPicker";
 
 const dialog = document.querySelector("dialog#add-project-dialog");
 const form = document.querySelector("form#add-project-form");
