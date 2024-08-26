@@ -2,7 +2,6 @@ import projects from "../../store/projects";
 import tasks from "../../store/tasks";
 import navigator from "../../utils/navigator";
 import ColorPicker from "../colorPicker";
-import { COLORS } from "../colorPicker";
 
 const dialog = document.querySelector("dialog#add-project-dialog");
 const form = document.querySelector("form#add-project-form");
@@ -24,14 +23,10 @@ let currentProject = null;
 const openDialog = (project = null) => {
   currentProject = project;
 
-  const currentColor = (currentProject && currentProject.color) || COLORS[0];
-
-  colorPicker.getButton().style.backgroundColor = currentColor;
-  colorPicker.getInput().value = currentColor;
-
   submitBtn.textContent = currentProject ? "Edit project" : "Add project";
   projectName.value = (currentProject && currentProject.name) || "";
 
+  colorPicker.updateColor(project);
   dialog.showModal();
 };
 

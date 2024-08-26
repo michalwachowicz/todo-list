@@ -1,6 +1,6 @@
 import Popup from "./popup";
 
-export const COLORS = [
+const COLORS = [
   "#dc2626",
   "#ea580c",
   "#d97706",
@@ -53,5 +53,12 @@ export default class ColorPicker extends Popup {
 
   getInput() {
     return this.#input;
+  }
+
+  updateColor(obj) {
+    const currentColor = (obj && obj.color) || COLORS[0];
+
+    this.getButton().style.backgroundColor = currentColor;
+    this.getInput().value = currentColor;
   }
 }
