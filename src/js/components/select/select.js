@@ -5,7 +5,7 @@ export default class Select extends Popup {
 
   constructor(button, popup, input, list, onClick) {
     super(button, popup, input, (e) => this.#onClick(e, onClick));
-    this.updateList(list);
+    this.setList(list);
   }
 
   #fill() {

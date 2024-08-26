@@ -3,6 +3,7 @@ import tasks from "../../store/tasks";
 import DatePicker from "../picker/datePicker";
 import ProjectSelect from "../select/projectSelect";
 import projects from "../../store/projects";
+import PrioritySelect from "../select/prioritySelect";
 
 const dialog = document.querySelector("dialog#add-edit-dialog");
 const form = document.querySelector("form#add-edit-form");
@@ -25,6 +26,12 @@ const projectSelect = new ProjectSelect(
   "#add-edit-project"
 );
 
+const prioritySelect = new PrioritySelect(
+  'label[for="add-edit-priority"]',
+  ".form-priority-popup",
+  "#add-edit-priority"
+);
+
 let currentTask = null;
 
 const openDialog = (task = null) => {
@@ -37,6 +44,7 @@ const openDialog = (task = null) => {
   projectSelect.setCurrentProject(
     projects.find((project) => project.id == task.projectId)
   );
+  prioritySelect.setCurrentPriority((task && task.priority) || 4);
 
   dialog.showModal();
 };
@@ -53,7 +61,8 @@ form.addEventListener("submit", (e) => {
     nameInput.value,
     descriptionInput.value || null,
     datePicker.getDate(),
-    projectSelect.getInput().value
+    projectSelect.getInput().value,
+    prioritySelect.getInput().value
   );
 
   if (currentTask && currentTask.id !== -1) {
