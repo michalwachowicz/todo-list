@@ -20,8 +20,10 @@
   }
 
   &-header {
+    display: flex;
     margin: 1rem 2rem;
     height: 1.5rem;
+    gap: 1rem;
   }
 
   &-content {
