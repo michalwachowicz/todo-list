@@ -41,6 +41,8 @@ form.addEventListener("submit", (e) => {
       document.querySelector(".sidebar-nav-list-projects")
     );
 
+    tasks.getTasks().filter((task) => task.projectId !== current.id);
+
     navigator.activate(navigator.mainNav[0]);
     navigator.updateNavigationDOM();
   }
