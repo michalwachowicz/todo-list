@@ -9,6 +9,8 @@ const createProject = (name, color) => {
 const projects = new Store("projects");
 const getProjects = () => projects;
 
+const find = (filter) => projects.getList().find(filter);
+
 const renderProjects = (container) => {
   container.innerHTML = "";
 
@@ -42,4 +44,4 @@ const renderProjects = (container) => {
   });
 };
 
-export default { createProject, getProjects, renderProjects };
+export default { find, createProject, getProjects, renderProjects };
