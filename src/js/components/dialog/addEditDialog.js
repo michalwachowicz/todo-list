@@ -16,7 +16,7 @@ const cancelBtn = form.querySelector(".btn-cancel");
 
 const datePicker = new DatePicker(
   "form#add-edit-form",
-  ".form-btn-label-date",
+  ".btn-label-date",
   'input[type="date"]'
 );
 
