@@ -34,7 +34,6 @@ export default class DatePicker {
 
   #updateLabel() {
     const formattedDate = formatDate(this.#date);
-    console.log(formattedDate);
 
     this.#label.innerHTML = calendarIcon + formattedDate.formattedDate;
     this.#label.appendChild(this.#input);
@@ -48,5 +47,9 @@ export default class DatePicker {
   updateDate(date) {
     this.#date = date;
     this.#updateLabel();
+  }
+
+  getDate() {
+    return this.#date;
   }
 }

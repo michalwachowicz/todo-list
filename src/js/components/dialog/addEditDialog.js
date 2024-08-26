@@ -41,7 +41,7 @@ form.addEventListener("submit", (e) => {
   const task = tasks.createTask(
     nameInput.value,
     descriptionInput.value || null,
-    null
+    datePicker.getDate()
   );
 
   if (currentTask && currentTask.id !== -1) {
