@@ -1,6 +1,7 @@
 import navigator from "../../utils/navigator";
 import tasks from "../../store/tasks";
 import DatePicker from "../datePicker";
+import ProjectSelect from "../projectSelect";
 
 const dialog = document.querySelector("dialog#add-edit-dialog");
 const form = document.querySelector("form#add-edit-form");
@@ -15,6 +16,12 @@ const datePicker = new DatePicker(
   "form#add-edit-form",
   ".form-btn-label-date",
   'input[type="date"]'
+);
+
+new ProjectSelect(
+  'label[for="add-edit-project"]',
+  ".form-project-popup",
+  "#add-edit-project"
 );
 
 let currentTask = null;

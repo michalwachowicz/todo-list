@@ -25,6 +25,15 @@
           <label class="form-btn-label form-btn-label-date" for="add-edit-date">
             <input type="date" id="add-edit-date" required />
           </label>
+          <div>
+            <label
+              class="form-btn-label form-btn-label-date"
+              for="add-edit-project"
+            >
+              <input type="number" class="hidden" id="add-edit-project" />
+            </label>
+            <ul class="form-popup form-project-popup hidden"></ul>
+          </div>
         </div>
         <hr />
         <div class="form-btns-func">
@@ -66,7 +75,7 @@
             <label for="color" class="form-color project-color project-color-m">
               <input type="text" class="hidden" id="color" name="color" />
             </label>
-            <ul class="form-color-popup hidden"></ul>
+            <ul class="form-popup form-color-popup hidden"></ul>
           </div>
           <input
             type="text"
