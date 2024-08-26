@@ -8,8 +8,14 @@ import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
 import editIcon from "!!raw-loader!../../assets/icons/edit.svg";
 import deleteIcon from "!!raw-loader!../../assets/icons/delete.svg";
 
-const createTask = (title, description, dueDate, project, priority = 4) => {
-  return { title, description, dueDate, project, priority };
+const createTask = (
+  title,
+  description,
+  dueDate,
+  projectId = -1,
+  priority = 4
+) => {
+  return { title, description, dueDate, projectId, priority };
 };
 
 const tasks = new Store("tasks");

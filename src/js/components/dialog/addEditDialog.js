@@ -33,7 +33,6 @@ form.addEventListener("submit", (e) => {
   const task = tasks.createTask(
     nameInput.value,
     descriptionInput.value || null,
-    null,
     null
   );
 
