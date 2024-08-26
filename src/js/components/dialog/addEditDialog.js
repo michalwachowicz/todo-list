@@ -1,5 +1,6 @@
 import navigator from "../../utils/navigator";
 import tasks from "../../store/tasks";
+import DatePicker from "../datePicker";
 
 const dialog = document.querySelector("dialog#add-edit-dialog");
 const form = document.querySelector("form#add-edit-form");
@@ -10,6 +11,12 @@ const descriptionInput = form.querySelector("#description");
 const submitBtn = form.querySelector('button[type="submit"]');
 const cancelBtn = form.querySelector(".btn-cancel");
 
+const datePicker = new DatePicker(
+  "form#add-edit-form",
+  ".form-btn-label-date",
+  'input[type="date"]'
+);
+
 let currentTask = null;
 
 const openDialog = (task = null) => {
@@ -18,6 +25,7 @@ const openDialog = (task = null) => {
   nameInput.value = (task && task.title) || "";
   descriptionInput.value = (task && task.description) || "";
   submitBtn.textContent = task ? "Edit task" : "Add task";
+  datePicker.updateDate((task && task.dueDate) || null);
 
   dialog.showModal();
 };
