@@ -47,6 +47,11 @@
     }
   }
 
+  &-date-picker-input {
+    position: absolute;
+    visibility: hidden;
+  }
+
   label {
     cursor: pointer;
   }
