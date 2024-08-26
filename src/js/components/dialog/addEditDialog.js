@@ -2,6 +2,7 @@ import navigator from "../../utils/navigator";
 import tasks from "../../store/tasks";
 import DatePicker from "../datePicker";
 import ProjectSelect from "../projectSelect";
+import projects from "../../store/projects";
 
 const dialog = document.querySelector("dialog#add-edit-dialog");
 const form = document.querySelector("form#add-edit-form");
@@ -18,7 +19,7 @@ const datePicker = new DatePicker(
   'input[type="date"]'
 );
 
-new ProjectSelect(
+const projectSelect = new ProjectSelect(
   'label[for="add-edit-project"]',
   ".form-project-popup",
   "#add-edit-project"
@@ -33,6 +34,9 @@ const openDialog = (task = null) => {
   descriptionInput.value = (task && task.description) || "";
   submitBtn.textContent = task ? "Edit task" : "Add task";
   datePicker.updateDate((task && task.dueDate) || null);
+  projectSelect.setCurrentProject(
+    projects.find((project) => project.id == task.projectId)
+  );
 
   dialog.showModal();
 };
@@ -48,7 +52,8 @@ form.addEventListener("submit", (e) => {
   const task = tasks.createTask(
     nameInput.value,
     descriptionInput.value || null,
-    datePicker.getDate()
+    datePicker.getDate(),
+    projectSelect.getInput().value
   );
 
   if (currentTask && currentTask.id !== -1) {

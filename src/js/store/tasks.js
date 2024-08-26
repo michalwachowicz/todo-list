@@ -7,6 +7,7 @@ import Store from "./store";
 import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
 import editIcon from "!!raw-loader!../../assets/icons/edit.svg";
 import deleteIcon from "!!raw-loader!../../assets/icons/delete.svg";
+import projects from "./projects";
 
 const createTask = (
   title,
@@ -78,16 +79,18 @@ const renderTask = (task) => {
   project.classList = "task-project";
 
   const projectTitle = document.createElement("div");
+  const taskProject = projects.find((p) => p.id == task.projectId);
+
   projectTitle.classList = `task-project-title ${
-    task.project ? "" : "task-project-title-empty"
+    taskProject ? "" : "task-project-title-empty"
   }`;
-  projectTitle.textContent = task.project ? task.project.name : "No Project";
+  projectTitle.textContent = taskProject ? taskProject.name : "No Project";
   project.append(projectTitle);
 
-  if (task.project) {
+  if (taskProject) {
     const projectColor = document.createElement("div");
     projectColor.classList = "project-color project-color-s";
-    projectColor.style.backgroundColor = task.project.color;
+    projectColor.style.backgroundColor = taskProject.color;
     project.append(projectColor);
   }
 
