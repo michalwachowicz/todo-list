@@ -48,6 +48,11 @@ export default class Store {
     }
   }
 
+  filter(func) {
+    this.#list = this.#list.filter(func);
+    this.save();
+  }
+
   getList() {
     return this.#list;
   }
