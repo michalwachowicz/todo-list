@@ -48,6 +48,7 @@ export default class ColorPicker extends Popup {
 
       this.#input.value = color;
       this.getButton().style.backgroundColor = color;
+      this.close();
     }
   }
 

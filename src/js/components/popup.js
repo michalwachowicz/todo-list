@@ -19,7 +19,6 @@ export default class Popup {
       e.stopPropagation();
 
       onClick(e);
-      this.close();
     });
 
     window.addEventListener("click", (e) => {
