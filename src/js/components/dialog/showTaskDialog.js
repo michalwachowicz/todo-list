@@ -55,11 +55,16 @@ const openDialog = (task = null) => {
 
   projectSelect.updateList();
 
-  titleInput.value = (task && task.title) || "";
-  title.textContent = (task && task.title) || "";
+  const titleValue = (task && task.title) || "";
 
-  descriptionInput.value = (task && task.description) || "";
-  description.textContent = (task && task.description) || "";
+  titleInput.value = titleValue;
+  title.textContent = titleValue;
+
+  const descriptionValue = (task && task.description) || "";
+
+  descriptionInput.value = descriptionValue;
+  descriptionInput.parentNode.dataset.value = descriptionValue;
+  description.textContent = descriptionValue;
 
   btnCheck.classList = "btn btn-check";
   if (task && task.priority)
