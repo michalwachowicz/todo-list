@@ -3,11 +3,13 @@ import addEditDialog from "../components/dialog/addEditDialog";
 import deleteDialog from "../components/dialog/deleteDialog";
 import formatDate from "../utils/date";
 import Store from "./store";
+import UndoPopup from "../components/undoPopup";
 
 import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
 import editIcon from "!!raw-loader!../../assets/icons/edit.svg";
 import deleteIcon from "!!raw-loader!../../assets/icons/delete.svg";
 import projects from "./projects";
+import navigator from "../utils/navigator";
 
 const createTask = (
   title,
@@ -22,6 +24,8 @@ const createTask = (
 const tasks = new Store("tasks");
 const getTasks = () => tasks;
 
+const undoPopup = new UndoPopup(".popup-undo");
+
 const renderTask = (task) => {
   const element = document.createElement("li");
   element.classList = "task";
@@ -30,7 +34,15 @@ const renderTask = (task) => {
   const btn = document.createElement("button");
   btn.type = "button";
   btn.classList = `btn btn-check btn-check-${task.priority}`;
-  btn.addEventListener("click", () => {});
+  btn.addEventListener("click", () => {
+    tasks.delete(task.id);
+    undoPopup.open(task);
+
+    renderTasks(
+      document.querySelector(".task-list"),
+      navigator.getActiveItem().filter
+    );
+  });
 
   const container = document.createElement("div");
   container.classList = "task-container";
