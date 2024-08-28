@@ -7,11 +7,11 @@ import closeIcon from "!!raw-loader!../../../assets/icons/close.svg";
 import projects from "../../store/projects";
 import navigator from "../../utils/navigator";
 
-const dialog = document.querySelector("dialog#show-task-dialog");
-const form = document.querySelector("form#show-task-form");
+const dialog = document.querySelector(".dialog-show-task");
+const form = document.querySelector(".form-show-task");
 
-const titleInput = form.querySelector("#show-task-name");
-const descriptionInput = form.querySelector("#show-task-description");
+const titleInput = form.querySelector(".form-input-title");
+const descriptionInput = form.querySelector(".form-input-description");
 
 const btnCheck = dialog.querySelector(".btn-check");
 const info = dialog.querySelector(".dialog-task-info");
@@ -33,33 +33,20 @@ const updateValue = (key, value) => {
   currentTask = updatedTask;
 };
 
-const datePicker = new DatePicker(
-  "dialog#show-task-dialog",
-  ".btn-label-date",
-  'input[type="date"]',
-  () => updateValue("dueDate", datePicker.getDate())
+const datePicker = new DatePicker(".dialog-show-task", () =>
+  updateValue("dueDate", datePicker.getDate())
 );
 
-const projectSelect = new ProjectSelect(
-  "dialog#show-task-dialog",
-  'label[for="show-task-project"]',
-  ".form-project-popup",
-  "#show-task-project",
-  () => updateValue("projectId", projectSelect.getCurrentProject().id)
+const projectSelect = new ProjectSelect(".dialog-show-task", () =>
+  updateValue("projectId", projectSelect.getCurrentProject().id)
 );
 
-const prioritySelect = new PrioritySelect(
-  "dialog#show-task-dialog",
-  'label[for="show-task-priority"]',
-  ".form-priority-popup",
-  "#show-task-priority",
-  () => {
-    const priority = prioritySelect.getCurrentPriority();
+const prioritySelect = new PrioritySelect(".dialog-show-task", () => {
+  const priority = prioritySelect.getCurrentPriority();
 
-    updateValue("priority", priority);
-    btnCheck.classList = `btn btn-check btn-check-${priority}`;
-  }
-);
+  updateValue("priority", priority);
+  btnCheck.classList = `btn btn-check btn-check-${priority}`;
+});
 
 let currentTask = null;
 

@@ -5,34 +5,18 @@ import ProjectSelect from "../select/projectSelect";
 import projects from "../../store/projects";
 import PrioritySelect from "../select/prioritySelect";
 
-const dialog = document.querySelector("dialog#add-edit-dialog");
-const form = document.querySelector("form#add-edit-form");
+const dialog = document.querySelector(".dialog-add-edit");
+const form = document.querySelector(".form-add-edit");
 
-const nameInput = form.querySelector("#name");
-const descriptionInput = form.querySelector("#description");
+const nameInput = form.querySelector(".form-input-title");
+const descriptionInput = form.querySelector(".form-input-description");
 
 const submitBtn = form.querySelector('button[type="submit"]');
 const cancelBtn = form.querySelector(".btn-cancel");
 
-const datePicker = new DatePicker(
-  "form#add-edit-form",
-  ".btn-label-date",
-  'input[type="date"]'
-);
-
-const projectSelect = new ProjectSelect(
-  "form#add-edit-form",
-  'label[for="add-edit-project"]',
-  ".form-project-popup",
-  "#add-edit-project"
-);
-
-const prioritySelect = new PrioritySelect(
-  "form#add-edit-form",
-  'label[for="add-edit-priority"]',
-  ".form-priority-popup",
-  "#add-edit-priority"
-);
+const datePicker = new DatePicker(".dialog-add-edit");
+const projectSelect = new ProjectSelect(".dialog-add-edit");
+const prioritySelect = new PrioritySelect(".dialog-add-edit");
 
 let currentTask = null;
 

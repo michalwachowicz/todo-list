@@ -16,7 +16,12 @@ const COLORS = [
 ];
 
 export default class ColorPicker extends Popup {
-  constructor(parent, button, popup, input) {
+  constructor(
+    parent,
+    button = ".form-color",
+    popup = ".form-popup-color",
+    input = ".form-input-color"
+  ) {
     super(parent, button, popup, input, (e) => this.#onClick(e));
 
     COLORS.forEach((color) => {

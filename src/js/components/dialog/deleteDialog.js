@@ -2,12 +2,12 @@ import projects from "../../store/projects";
 import tasks from "../../store/tasks";
 import navigator from "../../utils/navigator";
 
-const dialog = document.querySelector("dialog#delete-dialog");
-const form = document.querySelector("form#delete-form");
+const dialog = document.querySelector(".dialog-delete");
+const form = document.querySelector(".form-delete");
 const title = form.querySelector(".form-title");
 
 const cancelBtn = form.querySelector("button.btn-cancel");
-const submitBtn = form.querySelector('button[type="submit"');
+const submitBtn = form.querySelector('button[type="submit"]');
 
 let current = { type: null, id: -1 };
 

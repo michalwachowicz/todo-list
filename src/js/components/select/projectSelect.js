@@ -5,7 +5,13 @@ import Select from "./select";
 export default class ProjectSelect extends Select {
   #project;
 
-  constructor(parent, button, popup, input, onClick = null) {
+  constructor(
+    parent,
+    onClick = null,
+    button = ".btn-label-project",
+    popup = ".form-popup-project",
+    input = ".form-input-project"
+  ) {
     super(parent, button, popup, input, [], (e) => {
       this.#onClick(e);
       if (onClick) onClick(e);

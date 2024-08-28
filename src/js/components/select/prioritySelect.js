@@ -16,7 +16,13 @@ const PRIORITIES = [
 export default class PrioritySelect extends Select {
   #priority;
 
-  constructor(parent, button, popup, input, onClick) {
+  constructor(
+    parent,
+    onClick = null,
+    button = ".btn-label-priority",
+    popup = ".form-popup-priority",
+    input = ".form-input-priority"
+  ) {
     super(parent, button, popup, input, PRIORITIES, (e) => {
       this.#onClick(e);
       if (onClick) onClick(e);

@@ -6,7 +6,12 @@ export default class DatePicker {
   #input;
   #date;
 
-  constructor(parent, label, input, onChange = null) {
+  constructor(
+    parent,
+    onChange = null,
+    label = ".btn-label-date",
+    input = ".form-input-date"
+  ) {
     const parentElement = document.querySelector(parent);
 
     this.#label = parentElement.querySelector(label);

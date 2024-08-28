@@ -4,21 +4,16 @@ import navigator from "../../utils/navigator";
 import visibility from "../../utils/visibility";
 import ColorPicker from "../picker/colorPicker";
 
-const dialog = document.querySelector("dialog#add-project-dialog");
-const form = document.querySelector("form#add-project-form");
+const dialog = document.querySelector(".dialog-add-project");
+const form = document.querySelector(".form-add-project");
 
 const cancelBtn = form.querySelector("button.btn-cancel");
 const submitBtn = form.querySelector('button[type="submit"]');
 
-const projectName = form.querySelector("#project-name");
+const projectName = form.querySelector(".form-input-title");
 const error = form.querySelector(".form-error");
 
-const colorPicker = new ColorPicker(
-  "form#add-project-form",
-  'label[for="color"]',
-  ".form-color-popup",
-  "#color"
-);
+const colorPicker = new ColorPicker(".form-add-project");
 
 let currentProject = null;
 
