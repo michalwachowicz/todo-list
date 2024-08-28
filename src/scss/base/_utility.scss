@@ -1,3 +1,7 @@
 .hidden {
   display: none !important;
 }
+
+* {
+  transition: color, background-color 0.3s ease;
+}
