@@ -1,5 +1,6 @@
 import settingsIcon from "!!raw-loader!../../../assets/icons/settings.svg";
 import projects from "../../store/projects";
+import visibility from "../../utils/visibility";
 import addEditProjectDialog from "../dialog/addEditProjectDialog";
 
 const btn = document.querySelector(".btn-project-edit");
@@ -10,11 +11,11 @@ const btn = document.querySelector(".btn-project-edit");
 
 const showButton = (id) => {
   btn.dataset.id = id;
-  btn.classList.remove("hidden");
+  visibility.show(btn);
 };
 
 const hideButton = () => {
-  btn.classList.add("hidden");
+  visibility.hide(btn);
 };
 
 btn.addEventListener("click", () => {

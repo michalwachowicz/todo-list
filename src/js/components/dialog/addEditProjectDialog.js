@@ -1,6 +1,7 @@
 import projects from "../../store/projects";
 import tasks from "../../store/tasks";
 import navigator from "../../utils/navigator";
+import visibility from "../../utils/visibility";
 import ColorPicker from "../picker/colorPicker";
 
 const dialog = document.querySelector("dialog#add-project-dialog");
@@ -74,11 +75,11 @@ projectName.addEventListener("input", (e) => {
     currentProject && text.toLowerCase() == currentProject.name.toLowerCase();
 
   if (!navigator.exists(text) || isCurrentName) {
-    error.classList.add("hidden");
+    visibility.hide(error);
     submitBtn.disabled = false;
   } else {
     error.textContent = "A project with this name already exists";
-    error.classList.remove("hidden");
+    visibility.show(error);
     submitBtn.disabled = true;
   }
 });

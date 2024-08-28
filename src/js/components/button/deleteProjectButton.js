@@ -1,4 +1,5 @@
 import deleteIcon from "!!raw-loader!../../../assets/icons/delete.svg";
+import visibility from "../../utils/visibility";
 import deleteDialog from "../dialog/deleteDialog";
 
 const btn = document.querySelector(".btn.btn-delete");
@@ -9,11 +10,11 @@ const btn = document.querySelector(".btn.btn-delete");
 
 const showButton = (id) => {
   btn.dataset.id = id;
-  btn.classList.remove("hidden");
+  visibility.show(btn);
 };
 
 const hideButton = () => {
-  btn.classList.add("hidden");
+  visibility.hide(btn);
 };
 
 btn.addEventListener("click", () => {

@@ -1,6 +1,7 @@
 import closeIcon from "!!raw-loader!../../assets/icons/close.svg";
 import tasks from "../store/tasks";
 import navigator from "../utils/navigator";
+import visibility from "../utils/visibility";
 import createIconButton from "./button/iconButton";
 
 export default class UndoPopup {
@@ -28,7 +29,7 @@ export default class UndoPopup {
   }
 
   open(task) {
-    this.#popup.classList.remove("hidden");
+    visibility.show(this.#popup);
     this.#task = task;
 
     this.addTimeout();
@@ -42,6 +43,6 @@ export default class UndoPopup {
   close() {
     clearTimeout(this.#timeout);
 
-    this.#popup.classList.add("hidden");
+    visibility.hide(this.#popup);
   }
 }

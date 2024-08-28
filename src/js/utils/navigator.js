@@ -6,6 +6,7 @@ import inboxIcon from "!!raw-loader!../../assets/icons/inbox.svg";
 import starIcon from "!!raw-loader!../../assets/icons/star.svg";
 import calendarIcon from "!!raw-loader!../../assets/icons/calendar.svg";
 import { isAfter, isBefore, isToday, startOfToday } from "date-fns";
+import visibility from "./visibility";
 
 const createNavItem = (name, icon, active, filter) => {
   return {
@@ -71,12 +72,12 @@ const updateNavigationDOM = () => {
 
   if (activeItem.color) {
     colorElement.style.backgroundColor = activeItem.color;
-    colorElement.classList.remove("hidden");
+    visibility.show(colorElement);
 
     deleteProjectButton.showButton(targetBtn.dataset.id);
     editProjectButton.showButton(targetBtn.dataset.id);
   } else {
-    colorElement.classList.add("hidden");
+    visibility.hide(colorElement);
 
     deleteProjectButton.hideButton();
     editProjectButton.hideButton();

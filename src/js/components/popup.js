@@ -1,3 +1,5 @@
+import visibility from "../utils/visibility";
+
 export default class Popup {
   #button;
   #popup;
@@ -38,12 +40,12 @@ export default class Popup {
 
   open() {
     this.#isOpen = true;
-    this.#popup.classList.remove("hidden");
+    visibility.show(this.#popup);
   }
 
   close() {
     this.#isOpen = false;
-    this.#popup.classList.add("hidden");
+    visibility.hide(this.#popup);
   }
 
   getPopup() {
