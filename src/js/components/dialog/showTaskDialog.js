@@ -24,33 +24,41 @@ const closeBtn = createIconButton(closeIcon, () => dialog.close());
 
 dialog.appendChild(closeBtn);
 
-const updateDate = () => {
-  tasks.getTasks().update(currentTask.id, {
-    ...currentTask,
-    dueDate: datePicker.getDate(),
-  });
+const updateValue = (key, value) => {
+  const updatedTask = { ...currentTask, [key]: value };
+
+  tasks.getTasks().update(currentTask.id, updatedTask);
   tasks.renderTasks(navigator.getActiveItem().filter);
+
+  currentTask = updatedTask;
 };
 
 const datePicker = new DatePicker(
   "dialog#show-task-dialog",
   ".btn-label-date",
   'input[type="date"]',
-  updateDate
+  () => updateValue("dueDate", datePicker.getDate())
 );
 
 const projectSelect = new ProjectSelect(
   "dialog#show-task-dialog",
   'label[for="show-task-project"]',
   ".form-project-popup",
-  "#show-task-project"
+  "#show-task-project",
+  () => updateValue("projectId", projectSelect.getCurrentProject().id)
 );
 
 const prioritySelect = new PrioritySelect(
   "dialog#show-task-dialog",
   'label[for="show-task-priority"]',
   ".form-priority-popup",
-  "#show-task-priority"
+  "#show-task-priority",
+  () => {
+    const priority = prioritySelect.getCurrentPriority();
+
+    updateValue("priority", priority);
+    btnCheck.classList = `btn btn-check btn-check-${priority}`;
+  }
 );
 
 let currentTask = null;

@@ -3,8 +3,13 @@ import projects from "../../store/projects";
 import Select from "./select";
 
 export default class ProjectSelect extends Select {
-  constructor(parent, button, popup, input) {
-    super(parent, button, popup, input, [], (e) => this.#onClick(e));
+  #project;
+
+  constructor(parent, button, popup, input, onClick = null) {
+    super(parent, button, popup, input, [], (e) => {
+      this.#onClick(e);
+      if (onClick) onClick(e);
+    });
 
     this.setCurrentProject(null);
   }
@@ -13,7 +18,13 @@ export default class ProjectSelect extends Select {
     this.setList(this.getProjectsList());
   }
 
+  getCurrentProject() {
+    return this.#project;
+  }
+
   setCurrentProject(project) {
+    this.#project = project;
+
     if (project) {
       const color = document.createElement("div");
       color.classList = "project-color project-color-s";

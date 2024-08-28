@@ -14,9 +14,18 @@ const PRIORITIES = [
 ];
 
 export default class PrioritySelect extends Select {
-  constructor(parent, button, popup, input) {
-    super(parent, button, popup, input, PRIORITIES, (e) => this.#onClick(e));
+  #priority;
+
+  constructor(parent, button, popup, input, onClick) {
+    super(parent, button, popup, input, PRIORITIES, (e) => {
+      this.#onClick(e);
+      if (onClick) onClick(e);
+    });
     this.setCurrentPriority(4);
+  }
+
+  getCurrentPriority() {
+    return this.#priority;
   }
 
   setCurrentPriority(id) {
@@ -30,6 +39,8 @@ export default class PrioritySelect extends Select {
     this.getButton().classList.add(`btn-label-priority-${id}`);
     this.getButton().innerHTML = priority.icon + priority.name;
     this.getInput().value = id;
+
+    this.#priority = id;
   }
 
   #onClick(e) {
