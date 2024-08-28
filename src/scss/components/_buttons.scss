@@ -110,6 +110,15 @@
     }
   }
 
+  &-undo {
+    font-size: 1rem;
+    font-weight: 700;
+
+    @include themify {
+      color: themed("main");
+    }
+  }
+
   &-sidebar {
     display: flex;
     align-items: center;
