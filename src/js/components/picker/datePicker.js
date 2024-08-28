@@ -6,12 +6,11 @@ export default class DatePicker {
   #input;
   #date;
 
-  constructor(parent, label, input, date = null) {
+  constructor(parent, label, input, onChange = null) {
     const parentElement = document.querySelector(parent);
 
     this.#label = parentElement.querySelector(label);
     this.#input = parentElement.querySelector(input);
-    this.#date = date;
 
     this.#input.classList.add("form-date-picker-input");
 
@@ -25,7 +24,9 @@ export default class DatePicker {
 
     this.#input.addEventListener("change", (e) => {
       const value = e.target.value;
+
       this.updateDate(value ? new Date(value) : null);
+      if (onChange) onChange(e);
     });
   }
 

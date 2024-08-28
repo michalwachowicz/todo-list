@@ -24,10 +24,19 @@ const closeBtn = createIconButton(closeIcon, () => dialog.close());
 
 dialog.appendChild(closeBtn);
 
+const updateDate = () => {
+  tasks.getTasks().update(currentTask.id, {
+    ...currentTask,
+    dueDate: datePicker.getDate(),
+  });
+  tasks.renderTasks(navigator.getActiveItem().filter);
+};
+
 const datePicker = new DatePicker(
   "dialog#show-task-dialog",
   ".btn-label-date",
-  'input[type="date"]'
+  'input[type="date"]',
+  updateDate
 );
 
 const projectSelect = new ProjectSelect(
