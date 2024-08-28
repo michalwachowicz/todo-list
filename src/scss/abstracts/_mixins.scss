@@ -3,3 +3,16 @@
   height: $size;
   border-radius: 50%;
 }
+
+@mixin min-size($size) {
+  width: $size;
+  height: $size;
+  min-width: $size;
+  min-height: $size;
+}
+
+@mixin mobile-media() {
+  @media screen and (max-width: 580px) {
+    @content;
+  }
+}
