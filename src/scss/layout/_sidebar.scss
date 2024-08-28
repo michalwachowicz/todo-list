@@ -3,8 +3,8 @@
 .sidebar {
   width: 256px;
   min-height: 100vh;
-  flex: 0 1 auto;
   padding: 1rem;
+  transition: transform 0.3s ease-in-out;
 
   @include themify {
     background-color: themed("accent");
@@ -16,6 +16,11 @@
     top: 0;
     left: 0;
     z-index: 11;
+  }
+
+  &-container {
+    top: 0;
+    left: 0;
   }
 
   &-bg {
