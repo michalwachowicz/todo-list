@@ -42,7 +42,9 @@ const openDialog = (task = null) => {
   submitBtn.textContent = task ? "Edit task" : "Add task";
   datePicker.updateDate((task && task.dueDate) || null);
   projectSelect.setCurrentProject(
-    projects.find((project) => project.id == task.projectId)
+    task && task.projectId
+      ? projects.find((project) => project.id == task.projectId)
+      : null
   );
   prioritySelect.setCurrentPriority((task && task.priority) || 4);
 
