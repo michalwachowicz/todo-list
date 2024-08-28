@@ -68,6 +68,79 @@
       </form>
     </dialog>
 
+    <dialog class="dialog dialog-l" id="show-task-dialog">
+      <button type="button" class="btn btn-check"></button>
+
+      <div class="dialog-task-info-container">
+        <div class="dialog-task-info">
+          <h3 class="dialog-task-title"></h3>
+          <p class="dialog-task-description"></p>
+        </div>
+
+        <form class="form hidden" id="show-task-form">
+          <input
+            type="text"
+            placeholder="Task name"
+            class="form-text"
+            id="show-task-name"
+            name="show-task-name"
+            required
+          />
+          <div class="auto-grow">
+            <textarea
+              name="show-task-description"
+              id="show-task-description"
+              placeholder="Description"
+              oninput="this.parentNode.dataset.value = this.value"
+            ></textarea>
+          </div>
+          <div class="form-btns-func">
+            <button
+              type="button"
+              class="btn btn-func btn-func-secondary btn-cancel"
+            >
+              Cancel
+            </button>
+            <button type="submit" class="btn btn-func btn-func-primary">
+              Save
+            </button>
+          </div>
+        </form>
+
+        <hr />
+
+        <div class="form-btns-label">
+          <label class="btn-label btn-label-date" for="show-task-date">
+            <input type="date" id="show-task-date" name="show-task-date" />
+          </label>
+
+          <div>
+            <label class="btn-label btn-label-date" for="show-task-priority">
+              <input
+                type="number"
+                class="hidden"
+                id="show-task-priority"
+                name="show-task-priority"
+              />
+            </label>
+            <ul class="form-popup form-priority-popup hidden"></ul>
+          </div>
+
+          <div>
+            <label class="btn-label btn-label-date" for="show-task-project">
+              <input
+                type="number"
+                class="hidden"
+                id="show-task-project"
+                name="show-task-project"
+              />
+            </label>
+            <ul class="form-popup form-project-popup hidden"></ul>
+          </div>
+        </div>
+      </div>
+    </dialog>
+
     <dialog class="dialog dialog-s" id="delete-dialog">
       <form class="form" id="delete-form">
         <div class="form-title">Are you sure you want to delete this task?</div>
