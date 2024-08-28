@@ -68,7 +68,7 @@ form.addEventListener("submit", (e) => {
   );
 
   if (currentTask && currentTask.id !== -1) {
-    tasks.getTasks().update(currentTask.id, task);
+    tasks.getTasks().update(currentTask.id, { ...task, id: currentTask.id });
   } else {
     tasks.getTasks().add(task);
   }
