@@ -62,10 +62,7 @@ form.addEventListener("submit", (e) => {
     );
   }
 
-  tasks.renderTasks(
-    document.querySelector(".task-list"),
-    navigator.getActiveItem().filter
-  );
+  tasks.renderTasks(navigator.getActiveItem().filter);
 
   closeDialog();
 });

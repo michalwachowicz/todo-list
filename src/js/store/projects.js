@@ -26,10 +26,7 @@ const renderProjects = (container) => {
     btn.addEventListener("click", () => {
       navigator.activate(project);
       navigator.updateNavigationDOM("btn-sidebar", "main-title");
-      tasks.renderTasks(
-        document.querySelector(".task-list"),
-        (task) => task.projectId == project.id
-      );
+      tasks.renderTasks((task) => task.projectId == project.id);
     });
 
     const color = document.createElement("div");

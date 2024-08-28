@@ -47,10 +47,7 @@ form.addEventListener("submit", (e) => {
     navigator.updateNavigationDOM();
   }
 
-  tasks.renderTasks(
-    document.querySelector(".task-list"),
-    navigator.getActiveItem().filter
-  );
+  tasks.renderTasks(navigator.getActiveItem().filter);
 });
 
 () => {

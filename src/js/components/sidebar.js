@@ -54,7 +54,7 @@ const addMainNavButtons = () => {
     const btn = createSidebarButton(element, "btn-sidebar-l", () => {
       navigator.activate(element);
       navigator.updateNavigationDOM();
-      tasks.renderTasks(document.querySelector(".task-list"), element.filter);
+      tasks.renderTasks(element.filter);
     });
 
     nav.appendChild(createNavListItem(btn));

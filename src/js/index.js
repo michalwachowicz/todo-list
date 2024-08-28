@@ -10,4 +10,4 @@ createMainSection();
 navigator.updateFullNav();
 navigator.updateNavigationDOM();
 
-tasks.renderTasks(document.querySelector(".task-list"));
+tasks.renderTasks();

@@ -16,10 +16,7 @@ export default class UndoPopup {
       if (!this.#task || this.#task.id == -1) return;
 
       tasks.getTasks().add(this.#task);
-      tasks.renderTasks(
-        document.querySelector(".task-list"),
-        navigator.getActiveItem().filter
-      );
+      tasks.renderTasks(navigator.getActiveItem().filter);
 
       this.close();
     });
