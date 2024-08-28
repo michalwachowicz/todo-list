@@ -42,6 +42,8 @@ const addHeaderIcons = () => {
 
   const header = document.querySelector(".sidebar-header");
   header.append(themeBtn, sidebarBtn);
+
+  theme.setThemeDOM(themeBtn);
 };
 
 const addMainNavButtons = () => {

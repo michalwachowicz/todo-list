@@ -1,7 +1,7 @@
 import lightIcon from "!!raw-loader!../../assets/icons/light.svg";
 import darkIcon from "!!raw-loader!../../assets/icons/dark.svg";
 
-let currentTheme = "light";
+let currentTheme = localStorage.theme || "light";
 const themeIcons = {
   light: lightIcon,
   dark: darkIcon,
@@ -16,6 +16,7 @@ const setThemeDOM = (themeBtn) => {
 
 const switchTheme = () => {
   currentTheme = currentTheme == "light" ? "dark" : "light";
+  localStorage.theme = currentTheme;
 };
 
 export default { getCurrentThemeIcon, switchTheme, setThemeDOM };
