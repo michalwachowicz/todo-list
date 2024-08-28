@@ -21,12 +21,14 @@ const datePicker = new DatePicker(
 );
 
 const projectSelect = new ProjectSelect(
+  "form#add-edit-form",
   'label[for="add-edit-project"]',
   ".form-project-popup",
   "#add-edit-project"
 );
 
 const prioritySelect = new PrioritySelect(
+  "form#add-edit-form",
   'label[for="add-edit-priority"]',
   ".form-priority-popup",
   "#add-edit-priority"

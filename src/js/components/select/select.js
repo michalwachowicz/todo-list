@@ -3,8 +3,8 @@ import Popup from "../popup";
 export default class Select extends Popup {
   #list;
 
-  constructor(button, popup, input, list, onClick) {
-    super(button, popup, input, (e) => this.#onClick(e, onClick));
+  constructor(parent, button, popup, input, list, onClick) {
+    super(parent, button, popup, input, (e) => this.#onClick(e, onClick));
     this.setList(list);
   }
 

@@ -14,6 +14,7 @@ const projectName = form.querySelector("#project-name");
 const error = form.querySelector(".form-error");
 
 const colorPicker = new ColorPicker(
+  "form#add-project-form",
   'label[for="color"]',
   ".form-color-popup",
   "#color"

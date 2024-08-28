@@ -6,10 +6,12 @@ export default class Popup {
   #input;
   #isOpen;
 
-  constructor(button, popup, input, onClick) {
-    this.#button = document.querySelector(button);
-    this.#popup = document.querySelector(popup);
-    this.#input = document.querySelector(input);
+  constructor(parentSelector, button, popup, input, onClick) {
+    const parent = document.querySelector(parentSelector);
+
+    this.#button = parent.querySelector(button);
+    this.#popup = parent.querySelector(popup);
+    this.#input = parent.querySelector(input);
     this.#isOpen = false;
 
     this.#button.addEventListener("click", (e) => {

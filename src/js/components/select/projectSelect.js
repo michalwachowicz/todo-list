@@ -3,8 +3,8 @@ import projects from "../../store/projects";
 import Select from "./select";
 
 export default class ProjectSelect extends Select {
-  constructor(button, popup, input) {
-    super(button, popup, input, [], (e) => this.#onClick(e));
+  constructor(parent, button, popup, input) {
+    super(parent, button, popup, input, [], (e) => this.#onClick(e));
 
     this.setCurrentProject(null);
     this.updateList();

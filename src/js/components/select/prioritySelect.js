@@ -14,8 +14,8 @@ const PRIORITIES = [
 ];
 
 export default class PrioritySelect extends Select {
-  constructor(button, popup, input) {
-    super(button, popup, input, PRIORITIES, (e) => this.#onClick(e));
+  constructor(parent, button, popup, input) {
+    super(parent, button, popup, input, PRIORITIES, (e) => this.#onClick(e));
     this.setCurrentPriority(4);
   }
 
