@@ -1,5 +1,6 @@
 .main {
   flex: 1;
+  min-width: 0;
 
   &-title {
     font-size: 3rem;
@@ -33,6 +34,7 @@
     gap: 3rem;
     margin: 4rem auto;
     padding: 0 2rem;
-    width: min(900px, 100%);
+    width: 100%;
+    max-width: 900px;
   }
 }
