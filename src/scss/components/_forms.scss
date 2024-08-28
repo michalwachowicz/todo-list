@@ -1,6 +1,8 @@
 @use "../abstracts/themes" as *;
 
 .form {
+  position: relative;
+
   &-btns {
     &-func {
       display: flex;
