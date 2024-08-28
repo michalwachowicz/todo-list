@@ -25,18 +25,18 @@
     padding: 2rem;
   }
 
+  &-add-edit {
+    .auto-grow {
+      margin-top: 1rem;
+    }
+
+    .form-btns-label {
+      margin: 1.5rem 0;
+    }
+  }
+
   &::backdrop {
     background-color: rgba(0, 0, 0, 0.6);
-  }
-}
-
-#add-edit-dialog {
-  .auto-grow {
-    margin-top: 1rem;
-  }
-
-  .form-btns-label {
-    margin: 1.5rem 0;
   }
 }
 

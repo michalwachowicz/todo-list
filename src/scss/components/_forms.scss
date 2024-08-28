@@ -27,7 +27,7 @@
     }
   }
 
-  &-text {
+  &-input {
     font-size: 1.5rem;
     font-weight: 500;
   }
@@ -54,12 +54,12 @@
     @include themify {
       background-color: themed("background");
     }
-  }
 
-  &-color-popup {
-    position: fixed;
-    display: grid;
-    grid-template-columns: repeat(4, auto);
+    &-color {
+      position: fixed;
+      display: grid;
+      grid-template-columns: repeat(4, auto);
+    }
   }
 
   &-date-picker-input {
