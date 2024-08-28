@@ -1,12 +1,36 @@
-@use "../abstracts/themes" as *;
+@use "../abstracts" as *;
 
 .sidebar {
-  flex: 0 1 256px;
+  width: 256px;
+  min-height: 100vh;
+  flex: 0 1 auto;
   padding: 1rem;
 
   @include themify {
     background-color: themed("accent");
     border-right: 1px solid themed("sidebar-border");
+  }
+
+  @include mobile-media {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 11;
+  }
+
+  &-bg {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    min-width: 100vw;
+    min-height: 100vh;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 10;
+
+    @include mobile-media {
+      display: block;
+    }
   }
 
   &-content {
