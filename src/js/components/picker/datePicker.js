@@ -24,7 +24,8 @@ export default class DatePicker {
     });
 
     this.#input.addEventListener("change", (e) => {
-      this.updateDate(new Date(e.target.value));
+      const value = e.target.value;
+      this.updateDate(value ? new Date(value) : null);
     });
   }
 
