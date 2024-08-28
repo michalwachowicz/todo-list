@@ -81,13 +81,14 @@
     margin: 0 !important;
 
     @include themify {
-      color: themed("text");
+      color: themed("text-main");
       border: 1px solid themed("icon");
     }
 
     &-priority {
       @include priority-color-fill {
-        border-color: priority-colored();
+        border-color: priority-colored() !important;
+        color: priority-colored() !important;
       }
     }
 

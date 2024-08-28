@@ -26,11 +26,11 @@ $colors: (
     @content;
 
     .svg-fill path {
-      fill: priority-colored();
+      fill: priority-colored() !important;
     }
 
     .svg-stroke path {
-      stroke: priority-colored();
+      stroke: priority-colored() !important;
     }
   }
 }

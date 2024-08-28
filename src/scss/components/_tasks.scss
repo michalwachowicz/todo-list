@@ -47,7 +47,8 @@
     }
 
     @mixin set-color($color) {
-      color: $color;
+      color: $color !important;
+      border-color: $color !important;
 
       .svg-fill path {
         fill: $color !important;
