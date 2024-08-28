@@ -66,18 +66,20 @@
         </div>
 
         <form class="form form-show-task hidden">
-          <input
-            type="text"
-            placeholder="Task name"
-            class="form-input form-input-title"
-            required
-          />
-          <div class="auto-grow">
-            <textarea
-              class="form-input-description"
-              placeholder="Description"
-              oninput="this.parentNode.dataset.value = this.value"
-            ></textarea>
+          <div class="form-task-info">
+            <input
+              type="text"
+              placeholder="Task name"
+              class="form-input form-input-title"
+              required
+            />
+            <div class="auto-grow">
+              <textarea
+                class="form-input-description"
+                placeholder="Description"
+                oninput="this.parentNode.dataset.value = this.value"
+              ></textarea>
+            </div>
           </div>
           <div class="form-btns-func">
             <button
