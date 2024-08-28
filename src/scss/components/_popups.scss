@@ -1,0 +1,24 @@
+@use "../abstracts/themes" as *;
+
+.popup {
+  position: fixed;
+  padding: 1rem 1.5rem;
+  border-radius: 1rem;
+  box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
+  font-size: 1.25rem;
+  font-weight: 300;
+  z-index: 999;
+  left: 50%;
+  transform: translateX(-50%);
+  bottom: 2rem;
+
+  @include themify {
+    background-color: themed("background");
+  }
+
+  &-undo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+}
