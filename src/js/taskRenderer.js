@@ -10,6 +10,7 @@ import UndoPopup from "./components/undoPopup";
 import calendarIcon from "!!raw-loader!../assets/icons/calendar.svg";
 import editIcon from "!!raw-loader!../assets/icons/edit.svg";
 import deleteIcon from "!!raw-loader!../assets/icons/delete.svg";
+import showTaskDialog from "./components/dialog/showTaskDialog";
 
 export default class TaskRenderer {
   #parent;
@@ -44,6 +45,13 @@ export default class TaskRenderer {
         const task = this.#findTask(target);
 
         deleteDialog.openDialog({ type: "task", id: task.id });
+      } else if (
+        target.classList.contains("task-title") ||
+        target.classList.contains("task-description")
+      ) {
+        const task = this.#findTask(target);
+
+        showTaskDialog.openDialog(task);
       }
     });
   }

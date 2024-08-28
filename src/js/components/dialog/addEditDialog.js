@@ -39,6 +39,8 @@ let currentTask = null;
 const openDialog = (task = null) => {
   currentTask = task;
 
+  projectSelect.updateList();
+
   nameInput.value = (task && task.title) || "";
   descriptionInput.value = (task && task.description) || "";
   submitBtn.textContent = task ? "Edit task" : "Add task";

@@ -7,7 +7,6 @@ export default class ProjectSelect extends Select {
     super(parent, button, popup, input, [], (e) => this.#onClick(e));
 
     this.setCurrentProject(null);
-    this.updateList();
   }
 
   updateList() {
