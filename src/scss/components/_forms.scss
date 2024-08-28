@@ -42,6 +42,16 @@
     gap: 1rem;
   }
 
+  &-task-info {
+    padding: 0.5rem;
+    border-radius: 0.5rem;
+    margin-bottom: 1rem;
+
+    @include themify {
+      border: 2px solid themed("accent");
+    }
+  }
+
   &-popup {
     position: fixed;
     display: flex;
