@@ -16,11 +16,14 @@
           name="name"
           required
         />
-        <textarea
-          name="description"
-          id="description"
-          placeholder="Description"
-        ></textarea>
+        <div class="auto-grow">
+          <textarea
+            name="description"
+            id="description"
+            placeholder="Description"
+            oninput="this.parentNode.dataset.value = this.value"
+          ></textarea>
+        </div>
         <div class="form-btns-label">
           <label class="btn-label btn-label-date" for="add-edit-date">
             <input type="date" id="add-edit-date" name="add-edit-date" />
