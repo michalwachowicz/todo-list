@@ -6,9 +6,7 @@ const addSidebarIcon = () => {
   const header = document.querySelector(".main-header");
   const sidebarBtn = showSidebarBtn();
 
-  visibility.hide(sidebarBtn);
   header.appendChild(sidebarBtn);
-
   setSidebarBtn(sidebarBtn);
 };
 
