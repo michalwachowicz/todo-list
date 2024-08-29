@@ -60,6 +60,7 @@
     border-radius: 1rem;
     padding: 1rem;
     gap: 1rem;
+    box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
 
     @include themify {
       background-color: themed("background");
