@@ -7,14 +7,18 @@
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.25);
   width: min(600px, 100%);
   transition: display 0.3s allow-discrete;
-  animation: close-dialog 0.3s forwards;
 
   @include themify {
     background-color: themed("background");
   }
 
   &[open] {
-    animation: open-dialog 0.3s forwards;
+    animation: open-dialog 0.3s ease;
+  }
+
+  &:not([open]) {
+    display: none;
+    animation: close-dialog 0.3s ease;
   }
 
   &-s {
