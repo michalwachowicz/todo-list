@@ -37,29 +37,35 @@ cancelBtn.addEventListener("click", closeDialog);
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
+  let id;
   let project = projects.createProject(
     projectName.value,
     colorPicker.getInput().value
   );
 
   if (currentProject && currentProject.id !== -1) {
-    project = { ...project, id: currentProject.id };
+    id = currentProject.id;
+    project = { ...project, id };
 
     projects.getProjects().update(currentProject.id, project);
     projects.renderProjects(
       document.querySelector(".sidebar-nav-list-projects")
     );
 
-    navigator.activate(project);
-    navigator.updateNavigationDOM();
+    tasks.renderTasks((task) => task.projectId == project.id);
   } else {
     projects.getProjects().add(project);
     projects.renderProjects(
       document.querySelector(".sidebar-nav-list-projects")
     );
+
+    id = projects.getProjects().getCurrentId();
   }
 
-  tasks.renderTasks(navigator.getActiveItem().filter);
+  navigator.activate(project);
+  navigator.updateNavigationDOM();
+
+  tasks.renderTasks((task) => task.projectId == id);
 
   closeDialog();
 });
