@@ -14,7 +14,7 @@ const createTask = (
 const tasks = new Store("tasks");
 const getTasks = () => tasks;
 
-const renderer = new TaskRenderer(".task-list", tasks);
+const renderer = new TaskRenderer(".task-list", ".empty-state", tasks);
 
 const renderTasks = (filter = (task) => task) => {
   renderer.render(filter);

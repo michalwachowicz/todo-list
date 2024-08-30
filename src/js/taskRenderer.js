@@ -11,15 +11,18 @@ import calendarIcon from "!!raw-loader!../assets/icons/calendar.svg";
 import editIcon from "!!raw-loader!../assets/icons/edit.svg";
 import deleteIcon from "!!raw-loader!../assets/icons/delete.svg";
 import showTaskDialog from "./components/dialog/showTaskDialog";
+import visibility from "./utils/visibility";
 
 export default class TaskRenderer {
   #parent;
+  #emptyState;
   #tasks;
 
-  constructor(parent, tasks) {
+  constructor(parent, emptyState, tasks) {
     const undoPopup = new UndoPopup(".popup-undo");
 
     this.#parent = document.querySelector(parent);
+    this.#emptyState = document.querySelector(emptyState);
     this.#tasks = tasks;
 
     this.#parent.addEventListener("click", (e) => {
@@ -57,15 +60,25 @@ export default class TaskRenderer {
   }
 
   render(filter = (task) => task) {
+    this.#parent.innerHTML = "";
+
+    if (this.#tasks.getList().length < 1) {
+      visibility.show(this.#emptyState);
+      visibility.hide(this.#parent);
+      return;
+    }
+
     const sorted = this.#tasks
       .getList()
       .filter(filter)
       .sort((a, b) => a.priority - b.priority || a.dueDate - b.dueDate);
 
-    this.#parent.innerHTML = "";
     sorted.forEach((task) => {
       this.#parent.appendChild(this.#renderTask(task));
     });
+
+    visibility.hide(this.#emptyState);
+    visibility.show(this.#parent);
   }
 
   #findTask(target) {
