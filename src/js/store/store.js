@@ -56,4 +56,8 @@ export default class Store {
   getList() {
     return this.#list;
   }
+
+  getCurrentId() {
+    return this.#currentId;
+  }
 }
