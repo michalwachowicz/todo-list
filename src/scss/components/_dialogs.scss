@@ -46,7 +46,7 @@
     gap: 1.5rem;
 
     .dialog-task-title,
-    .dialog-input-title {
+    .form-input-title {
       font-size: 1.25rem;
       font-weight: 700;
     }
@@ -54,6 +54,16 @@
     .dialog-task-description,
     .dialog-input-description {
       font-size: 1rem;
+    }
+  }
+
+  &-task {
+    &-info-container {
+      flex: 1;
+    }
+
+    &-title.checked {
+      text-decoration: line-through;
     }
   }
 

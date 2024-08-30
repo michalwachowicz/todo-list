@@ -99,13 +99,56 @@
 
   &-check {
     position: relative;
-    border: 0.2rem solid #d4d4d8;
+    border: 0.2rem solid;
     flex: 0 0 auto;
 
-    @include circle(2rem);
-    @include priority-color {
-      border-color: priority-colored();
-      background-color: to-rgba(priority-colored(), 0.25);
+    & {
+      @include circle(2rem);
+      @include priority-color {
+        border-color: priority-colored() !important;
+        background-color: to-rgba(priority-colored(), 0.25);
+
+        &:disabled {
+          border-color: to-rgba(priority-colored(), 0.7) !important;
+          background-color: to-rgba(priority-colored(), 0.15);
+        }
+
+        &:not(:disabled):not(.checked)::after {
+          color: priority-colored() !important;
+        }
+
+        &.checked {
+          background-color: priority-colored() !important;
+        }
+      }
+    }
+
+    & {
+      @include themify {
+        border-color: themed("accent");
+
+        &:disabled {
+          border-color: to-rgba(themed("accent"), 0.7);
+        }
+
+        &:hover::after {
+          color: themed("accent");
+        }
+
+        &.checked::after {
+          color: themed("background");
+        }
+
+        &.checked {
+          background-color: themed("accent");
+        }
+      }
+    }
+
+    &:not(:disabled):hover::after,
+    &.checked::after {
+      content: "✓";
+      font-weight: 700;
     }
   }
 
