@@ -6,6 +6,7 @@ import ProjectSelect from "../select/projectSelect";
 import closeIcon from "!!raw-loader!../../../assets/icons/close.svg";
 import projects from "../../store/projects";
 import navigator from "../../utils/navigator";
+import visibility from "../../utils/visibility";
 
 const dialog = document.querySelector(".dialog-show-task");
 const form = document.querySelector(".form-show-task");
@@ -21,6 +22,9 @@ const description = info.querySelector(".dialog-task-description");
 
 const cancelBtn = form.querySelector(".btn-cancel");
 const closeBtn = createIconButton(closeIcon, () => dialog.close());
+
+const labelBtns = dialog.querySelector(".form-btns-label");
+const hr = dialog.querySelector("hr");
 
 dialog.appendChild(closeBtn);
 
@@ -49,9 +53,11 @@ const prioritySelect = new PrioritySelect(".dialog-show-task", () => {
 });
 
 let currentTask = null;
+let taskChecked = false;
 
 const openDialog = (task = null) => {
   currentTask = task;
+  taskChecked = false;
 
   projectSelect.updateList();
 
@@ -79,6 +85,8 @@ const openDialog = (task = null) => {
   prioritySelect.setCurrentPriority((task && task.priority) || 4);
 
   hideForm();
+  uncheckTask();
+
   dialog.showModal();
 };
 
@@ -88,15 +96,31 @@ const showForm = () => {
 
   titleInput.value = (currentTask && currentTask.title) || "";
   descriptionInput.value = (currentTask && currentTask.description) || "";
+
+  btnCheck.disabled = true;
 };
 
 const hideForm = () => {
   info.classList.remove("hidden");
   form.classList.add("hidden");
+
+  btnCheck.disabled = false;
+};
+
+const uncheckTask = (checkedClass = "checked") => {
+  taskChecked = false;
+
+  btnCheck.classList.remove(checkedClass);
+  title.classList.remove(checkedClass);
+
+  visibility.show(labelBtns);
+  visibility.show(hr);
 };
 
 cancelBtn.addEventListener("click", hideForm);
-info.addEventListener("click", showForm);
+info.addEventListener("click", () => {
+  if (!taskChecked) showForm();
+});
 
 form.addEventListener("submit", (e) => {
   e.preventDefault();
@@ -118,6 +142,28 @@ form.addEventListener("submit", (e) => {
   }
 
   hideForm();
+});
+
+btnCheck.addEventListener("click", () => {
+  const checkedClass = "checked";
+  taskChecked = !taskChecked;
+
+  if (taskChecked) {
+    taskChecked = true;
+
+    btnCheck.classList.add(checkedClass);
+    title.classList.add(checkedClass);
+
+    visibility.hide(labelBtns);
+    visibility.hide(hr);
+
+    tasks.getTasks().delete(currentTask.id);
+  } else {
+    uncheckTask(checkedClass);
+    tasks.getTasks().add(currentTask);
+  }
+
+  tasks.renderTasks(navigator.getActiveItem().filter);
 });
 
 export default { openDialog };
