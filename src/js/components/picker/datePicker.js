@@ -24,7 +24,17 @@ export default class DatePicker {
 
     this.#label.addEventListener("click", (e) => {
       e.preventDefault();
-      this.#input.showPicker();
+
+      if (this.#isIOS()) {
+        if (!this.#input.value) {
+          this.#input.value = new Date().toISOString().split("T")[0];
+        }
+
+        this.#input.classList.add("ios-switch");
+        this.#input.focus();
+      } else {
+        this.#input.showPicker();
+      }
     });
 
     this.#input.addEventListener("change", (e) => {
@@ -32,7 +42,21 @@ export default class DatePicker {
 
       this.updateDate(value ? new Date(value) : null);
       if (onChange) onChange(e);
+
+      if (this.#isIOS()) {
+        this.#input.classList.remove("ios-switch");
+      }
     });
+
+    this.#input.addEventListener("blur", () => {
+      if (this.#isIOS()) {
+        this.#input.classList.remove("ios-switch");
+      }
+    });
+  }
+
+  #isIOS() {
+    return /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
   }
 
   #resetLabelClass() {
