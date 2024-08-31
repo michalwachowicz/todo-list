@@ -21,7 +21,9 @@ const title = info.querySelector(".dialog-task-title");
 const description = info.querySelector(".dialog-task-description");
 
 const cancelBtn = form.querySelector(".btn-cancel");
-const closeBtn = createIconButton(closeIcon, () => dialog.close());
+const closeBtn = createIconButton(closeIcon, "Close dialog", () =>
+  dialog.close()
+);
 
 const labelBtns = dialog.querySelector(".form-btns-label");
 const hr = dialog.querySelector("hr");

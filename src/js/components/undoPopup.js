@@ -22,7 +22,9 @@ export default class UndoPopup {
       this.close();
     });
 
-    const closeBtn = createIconButton(closeIcon, () => this.close());
+    const closeBtn = createIconButton(closeIcon, "Close popup", () =>
+      this.close()
+    );
     this.#popup.appendChild(closeBtn);
 
     this.#popup.addEventListener("mouseover", () => this.addTimeout());

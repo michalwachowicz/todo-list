@@ -9,7 +9,8 @@ const sidebar = document.querySelector(".sidebar");
 const container = document.querySelector(".sidebar-container");
 const background = document.querySelector(".sidebar-bg");
 
-const createSidebarBtn = (onClick) => createIconButton(sidebarIcon, onClick);
+const createSidebarBtn = (onClick) =>
+  createIconButton(sidebarIcon, "Sidebar", onClick);
 const setSidebarBtn = (btn) => (sidebarBtn = btn);
 
 const showSidebarBtn = () =>

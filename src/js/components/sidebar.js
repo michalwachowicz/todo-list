@@ -34,10 +34,14 @@ const createNavListItem = (child) => {
 };
 
 const addHeaderIcons = () => {
-  const themeBtn = createIconButton(theme.getCurrentThemeIcon(), (e) => {
-    theme.switchTheme();
-    theme.setThemeDOM(e.target);
-  });
+  const themeBtn = createIconButton(
+    theme.getCurrentThemeIcon(),
+    "Change theme",
+    (e) => {
+      theme.switchTheme();
+      theme.setThemeDOM(e.target);
+    }
+  );
   const sidebarBtn = hideSidebarBtn();
 
   const header = document.querySelector(".sidebar-header");
@@ -64,7 +68,7 @@ const addMainNavButtons = () => {
 };
 
 const addProjectSection = () => {
-  const btn = createIconButton(addProjectIcon, () =>
+  const btn = createIconButton(addProjectIcon, "Edit project", () =>
     addEditProjectDialog.openDialog(null)
   );
   const header = document.querySelector(".sidebar-projects-header");

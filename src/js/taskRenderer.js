@@ -141,10 +141,10 @@ export default class TaskRenderer {
     const btns = document.createElement("div");
     btns.classList = "task-controls-btns";
 
-    const editBtn = createIconButton(editIcon);
+    const editBtn = createIconButton(editIcon, "Edit task");
     editBtn.classList.add("btn-task-edit");
 
-    const deleteBtn = createIconButton(deleteIcon);
+    const deleteBtn = createIconButton(deleteIcon, "Delete task");
     deleteBtn.classList.add("btn-task-delete");
 
     btns.append(editBtn, deleteBtn);
