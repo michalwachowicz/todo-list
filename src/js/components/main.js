@@ -1,4 +1,3 @@
-import visibility from "../utils/visibility";
 import createAddTaskButton from "./button/addTaskButton";
 import { showSidebarBtn, setSidebarBtn } from "./button/sidebarButton";
 
@@ -6,7 +5,7 @@ const addSidebarIcon = () => {
   const header = document.querySelector(".main-header");
   const sidebarBtn = showSidebarBtn();
 
-  header.appendChild(sidebarBtn);
+  header.insertBefore(sidebarBtn, header.children[0]);
   setSidebarBtn(sidebarBtn);
 };
 
