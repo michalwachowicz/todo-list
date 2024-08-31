@@ -22,7 +22,7 @@ $colors: (
 
 @mixin priority-color-fill() {
   @include priority-color {
-    color: priority-colored();
+    color: priority-colored() !important;
     @content;
 
     .svg-fill path {

@@ -62,8 +62,14 @@
       flex: 1;
     }
 
-    &-title.checked {
-      text-decoration: line-through;
+    &-title {
+      @include themify {
+        color: themed("text-main");
+      }
+
+      &.checked {
+        text-decoration: line-through;
+      }
     }
   }
 

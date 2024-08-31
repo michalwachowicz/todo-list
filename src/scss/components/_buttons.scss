@@ -67,6 +67,12 @@
     align-items: center;
     gap: 0.8rem;
 
+    & {
+      @include themify {
+        color: themed("text-main");
+      }
+    }
+
     &-priority {
       @include priority-color-fill();
     }
