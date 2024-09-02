@@ -137,7 +137,7 @@ class ShowTaskDialog extends Dialog {
         : null
     );
     this.prioritySelect.setCurrentPriority(
-      (this.curent && this.current.priority) || 4
+      (this.current && this.current.priority) || 4
     );
 
     this.hideForm();
