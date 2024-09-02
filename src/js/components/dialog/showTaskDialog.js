@@ -7,165 +7,170 @@ import closeIcon from "!!raw-loader!../../../assets/icons/close.svg";
 import projects from "../../store/projects";
 import navigator from "../../utils/navigator";
 import visibility from "../../utils/visibility";
+import Dialog from "./dialog";
 
-const dialog = document.querySelector(".dialog-show-task");
-const form = document.querySelector(".form-show-task");
+class ShowTaskDialog extends Dialog {
+  constructor() {
+    super(".dialog-show-task", ".form-show-task");
 
-const titleInput = form.querySelector(".form-input-title");
-const descriptionInput = form.querySelector(".form-input-description");
+    this.taskChecked = false;
 
-const btnCheck = dialog.querySelector(".btn-check");
-const info = dialog.querySelector(".dialog-task-info");
+    this.titleInput = this.form.querySelector(".form-input-title");
+    this.descriptionInput = this.form.querySelector(".form-input-description");
 
-const title = info.querySelector(".dialog-task-title");
-const description = info.querySelector(".dialog-task-description");
+    this.btnCheck = this.dialog.querySelector(".btn-check");
+    this.btnCheck.addEventListener("click", () => {
+      const checkedClass = "checked";
+      this.taskChecked = !this.taskChecked;
 
-const cancelBtn = form.querySelector(".btn-cancel");
-const closeBtn = createIconButton(closeIcon, "Close dialog", () =>
-  dialog.close()
-);
+      if (this.taskChecked) {
+        this.btnCheck.classList.add(checkedClass);
+        this.title.classList.add(checkedClass);
 
-const labelBtns = dialog.querySelector(".form-btns-label");
-const hr = dialog.querySelector("hr");
+        visibility.hide(this.labelBtns);
+        visibility.hide(this.hr);
 
-dialog.appendChild(closeBtn);
+        tasks.getTasks().delete(this.current.id);
+      } else {
+        this.uncheckTask(checkedClass);
+        tasks.getTasks().add(this.current);
+      }
 
-const updateValue = (key, value) => {
-  const updatedTask = { ...currentTask, [key]: value };
+      tasks.renderTasks(navigator.getActiveItem().filter);
+    });
 
-  tasks.getTasks().update(currentTask.id, updatedTask);
-  tasks.renderTasks(navigator.getActiveItem().filter);
+    this.info = this.dialog.querySelector(".dialog-task-info");
+    this.info.addEventListener("click", () => {
+      if (!this.taskChecked) this.showForm();
+    });
 
-  currentTask = updatedTask;
-};
+    this.labelBtns = this.dialog.querySelector(".form-btns-label");
+    this.hr = this.dialog.querySelector("hr");
 
-const datePicker = new DatePicker(".dialog-show-task", () =>
-  updateValue("dueDate", datePicker.getDate())
-);
+    this.title = this.info.querySelector(".dialog-task-title");
+    this.description = this.info.querySelector(".dialog-task-description");
 
-const projectSelect = new ProjectSelect(".dialog-show-task", () =>
-  updateValue("projectId", projectSelect.getCurrentProject().id)
-);
+    this.closeBtn = createIconButton(closeIcon, "Close dialog", () =>
+      this.dialog.close()
+    );
 
-const prioritySelect = new PrioritySelect(".dialog-show-task", () => {
-  const priority = prioritySelect.getCurrentPriority();
+    this.dialog.appendChild(this.closeBtn);
 
-  updateValue("priority", priority);
-  btnCheck.classList = `btn btn-check btn-check-${priority}`;
-});
+    this.datePicker = new DatePicker(".dialog-show-task", () =>
+      this.updateValue("dueDate", this.datePicker.getDate())
+    );
 
-let currentTask = null;
-let taskChecked = false;
+    this.projectSelect = new ProjectSelect(".dialog-show-task", () =>
+      this.updateValue("projectId", this.projectSelect.getCurrentProject().id)
+    );
 
-const openDialog = (task = null) => {
-  currentTask = task;
-  taskChecked = false;
+    this.prioritySelect = new PrioritySelect(".dialog-show-task", () => {
+      const priority = this.prioritySelect.getCurrentPriority();
 
-  projectSelect.updateList();
+      this.updateValue("priority", priority);
+      this.btnCheck.classList = `btn btn-check btn-check-${priority}`;
+    });
+  }
 
-  const titleValue = (task && task.title) || "";
+  onSubmit(e) {
+    e.preventDefault();
 
-  titleInput.value = titleValue;
-  title.textContent = titleValue;
+    const task = tasks.createTask(
+      this.titleInput.value,
+      this.descriptionInput.value || null,
+      this.datePicker.getDate(),
+      this.projectSelect.getInput().value,
+      this.prioritySelect.getInput().value
+    );
 
-  const descriptionValue = (task && task.description) || "";
+    if (this.current && this.current.id !== -1) {
+      const id = this.current.id;
 
-  descriptionInput.value = descriptionValue;
-  descriptionInput.parentNode.dataset.value = descriptionValue;
-  description.textContent = descriptionValue;
+      tasks.getTasks().update(id, { ...task, id });
+      tasks.renderTasks(navigator.getActiveItem().filter);
 
-  btnCheck.classList = "btn btn-check";
-  if (task && task.priority)
-    btnCheck.classList.add(`btn-check-${task.priority}`);
+      this.title.textContent = task.title;
+      this.description.textContent = task.description;
+    }
 
-  datePicker.updateDate((task && task.dueDate) || null);
-  projectSelect.setCurrentProject(
-    task && task.projectId
-      ? projects.find((project) => project.id == task.projectId)
-      : null
-  );
-  prioritySelect.setCurrentPriority((task && task.priority) || 4);
+    this.hideForm();
+  }
 
-  hideForm();
-  uncheckTask();
+  onCancel() {
+    this.hideForm();
+  }
 
-  dialog.showModal();
-};
+  updateValue(key, value) {
+    const updatedTask = { ...this.current, [key]: value };
 
-const showForm = () => {
-  info.classList.add("hidden");
-  form.classList.remove("hidden");
-
-  titleInput.value = (currentTask && currentTask.title) || "";
-  descriptionInput.value = (currentTask && currentTask.description) || "";
-
-  btnCheck.disabled = true;
-};
-
-const hideForm = () => {
-  info.classList.remove("hidden");
-  form.classList.add("hidden");
-
-  btnCheck.disabled = false;
-};
-
-const uncheckTask = (checkedClass = "checked") => {
-  taskChecked = false;
-
-  btnCheck.classList.remove(checkedClass);
-  title.classList.remove(checkedClass);
-
-  visibility.show(labelBtns);
-  visibility.show(hr);
-};
-
-cancelBtn.addEventListener("click", hideForm);
-info.addEventListener("click", () => {
-  if (!taskChecked) showForm();
-});
-
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const task = tasks.createTask(
-    titleInput.value,
-    descriptionInput.value || null,
-    datePicker.getDate(),
-    projectSelect.getInput().value,
-    prioritySelect.getInput().value
-  );
-
-  if (currentTask && currentTask.id !== -1) {
-    tasks.getTasks().update(currentTask.id, { ...task, id: currentTask.id });
+    tasks.getTasks().update(this.current.id, updatedTask);
     tasks.renderTasks(navigator.getActiveItem().filter);
 
-    title.textContent = task.title;
-    description.textContent = task.description;
+    this.current = updatedTask;
   }
 
-  hideForm();
-});
+  open(object) {
+    super.open(object);
+    this.taskChecked = false;
 
-btnCheck.addEventListener("click", () => {
-  const checkedClass = "checked";
-  taskChecked = !taskChecked;
+    this.projectSelect.updateList();
 
-  if (taskChecked) {
-    taskChecked = true;
+    const titleValue = (this.current && this.current.title) || "";
 
-    btnCheck.classList.add(checkedClass);
-    title.classList.add(checkedClass);
+    this.titleInput.value = titleValue;
+    this.title.textContent = titleValue;
 
-    visibility.hide(labelBtns);
-    visibility.hide(hr);
+    const descriptionValue = (this.current && this.current.description) || "";
 
-    tasks.getTasks().delete(currentTask.id);
-  } else {
-    uncheckTask(checkedClass);
-    tasks.getTasks().add(currentTask);
+    this.descriptionInput.value = descriptionValue;
+    this.descriptionInput.parentNode.dataset.value = descriptionValue;
+    this.description.textContent = descriptionValue;
+
+    this.btnCheck.classList = "btn btn-check";
+    if (this.current && this.current.priority)
+      this.btnCheck.classList.add(`btn-check-${this.current.priority}`);
+
+    this.datePicker.updateDate((this.current && this.current.dueDate) || null);
+    this.projectSelect.setCurrentProject(
+      this.current && this.current.projectId
+        ? projects.find((project) => project.id == this.current.projectId)
+        : null
+    );
+    this.prioritySelect.setCurrentPriority(
+      (this.curent && this.current.priority) || 4
+    );
+
+    this.hideForm();
+    this.uncheckTask();
   }
 
-  tasks.renderTasks(navigator.getActiveItem().filter);
-});
+  showForm() {
+    visibility.hide(this.info);
+    visibility.show(this.form);
 
-export default { openDialog };
+    this.titleInput.value = (this.current && this.current.title) || "";
+    this.descriptionInput.value =
+      (this.current && this.current.description) || "";
+
+    this.btnCheck.disabled = true;
+  }
+
+  hideForm() {
+    visibility.show(this.info);
+    visibility.hide(this.form);
+
+    this.btnCheck.disabled = false;
+  }
+
+  uncheckTask(checkedClass = "checked") {
+    this.taskChecked = false;
+
+    this.btnCheck.classList.remove(checkedClass);
+    this.title.classList.remove(checkedClass);
+
+    visibility.show(this.labelBtns);
+    visibility.show(this.hr);
+  }
+}
+
+export default new ShowTaskDialog();

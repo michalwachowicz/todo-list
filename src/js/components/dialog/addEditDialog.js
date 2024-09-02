@@ -4,68 +4,65 @@ import DatePicker from "../picker/datePicker";
 import ProjectSelect from "../select/projectSelect";
 import projects from "../../store/projects";
 import PrioritySelect from "../select/prioritySelect";
+import Dialog from "./dialog";
 
-const dialog = document.querySelector(".dialog-add-edit");
-const form = document.querySelector(".form-add-edit");
+const DIALOG_CLASS = ".dialog-add-edit";
 
-const nameInput = form.querySelector(".form-input-title");
-const descriptionInput = form.querySelector(".form-input-description");
+class AddEditDialog extends Dialog {
+  constructor() {
+    super(DIALOG_CLASS, ".form-add-edit");
 
-const submitBtn = form.querySelector('button[type="submit"]');
-const cancelBtn = form.querySelector(".btn-cancel");
+    this.datePicker = new DatePicker(DIALOG_CLASS);
+    this.projectSelect = new ProjectSelect(DIALOG_CLASS);
+    this.prioritySelect = new PrioritySelect(DIALOG_CLASS);
 
-const datePicker = new DatePicker(".dialog-add-edit");
-const projectSelect = new ProjectSelect(".dialog-add-edit");
-const prioritySelect = new PrioritySelect(".dialog-add-edit");
-
-let currentTask = null;
-
-const openDialog = (task = null) => {
-  currentTask = task;
-
-  projectSelect.updateList();
-  const description = (task && task.description) || "";
-
-  descriptionInput.value = description;
-  descriptionInput.parentNode.dataset.value = description;
-
-  nameInput.value = (task && task.title) || "";
-  submitBtn.textContent = task ? "Edit task" : "Add task";
-  datePicker.updateDate((task && task.dueDate) || null);
-  projectSelect.setCurrentProject(
-    task && task.projectId
-      ? projects.find((project) => project.id == task.projectId)
-      : null
-  );
-  prioritySelect.setCurrentPriority((task && task.priority) || 4);
-
-  dialog.showModal();
-};
-
-const closeDialog = () => {
-  dialog.close();
-};
-
-cancelBtn.addEventListener("click", closeDialog);
-form.addEventListener("submit", (e) => {
-  e.preventDefault();
-
-  const task = tasks.createTask(
-    nameInput.value,
-    descriptionInput.value || null,
-    datePicker.getDate(),
-    projectSelect.getInput().value,
-    prioritySelect.getInput().value
-  );
-
-  if (currentTask && currentTask.id !== -1) {
-    tasks.getTasks().update(currentTask.id, { ...task, id: currentTask.id });
-  } else {
-    tasks.getTasks().add(task);
+    this.nameInput = this.form.querySelector(".form-input-title");
+    this.descriptionInput = this.form.querySelector(".form-input-description");
   }
 
-  tasks.renderTasks(navigator.getActiveItem().filter);
-  closeDialog();
-});
+  open(object) {
+    super.open(object);
 
-export default { openDialog, closeDialog };
+    this.projectSelect.updateList();
+    const description = (this.current && this.current.description) || "";
+
+    this.descriptionInput.value = description;
+    this.descriptionInput.parentNode.dataset.value = description;
+
+    this.nameInput.value = (this.current && this.current.title) || "";
+    this.submitBtn.textContent = this.current ? "Edit task" : "Add task";
+    this.datePicker.updateDate((this.current && this.current.dueDate) || null);
+    this.projectSelect.setCurrentProject(
+      this.current && this.current.projectId
+        ? projects.find((project) => project.id == this.current.projectId)
+        : null
+    );
+    this.prioritySelect.setCurrentPriority(
+      (this.current && this.current.priority) || 4
+    );
+  }
+
+  onSubmit(e) {
+    e.preventDefault();
+
+    const task = tasks.createTask(
+      this.nameInput.value,
+      this.descriptionInput.value || null,
+      this.datePicker.getDate(),
+      this.projectSelect.getInput().value,
+      this.prioritySelect.getInput().value
+    );
+
+    if (this.current && this.current.id !== -1) {
+      const id = this.current.id;
+      tasks.getTasks().update(id, { ...task, id });
+    } else {
+      tasks.getTasks().add(task);
+    }
+
+    tasks.renderTasks(navigator.getActiveItem().filter);
+    this.close();
+  }
+}
+
+export default new AddEditDialog();

@@ -21,7 +21,7 @@ btn.addEventListener("click", () => {
   const id = btn.dataset.id;
 
   console.log(id);
-  deleteDialog.openDialog({ type: "project", id });
+  deleteDialog.open({ type: "project", id });
 });
 
 export default { showButton, hideButton };

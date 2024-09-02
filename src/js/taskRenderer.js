@@ -43,18 +43,18 @@ export default class TaskRenderer {
       } else if (target.classList.contains("btn-task-edit")) {
         const task = this.#findTask(target);
 
-        addEditDialog.openDialog(task);
+        addEditDialog.open(task);
       } else if (target.classList.contains("btn-task-delete")) {
         const task = this.#findTask(target);
 
-        deleteDialog.openDialog({ type: "task", id: task.id });
+        deleteDialog.open({ type: "task", id: task.id });
       } else if (
         target.classList.contains("task-title") ||
         target.classList.contains("task-description")
       ) {
         const task = this.#findTask(target);
 
-        showTaskDialog.openDialog(task);
+        showTaskDialog.open(task);
       }
     });
   }

@@ -6,7 +6,7 @@ export default function createAddTaskButton(classList) {
 
   btn.classList = `btn btn-add-task ${classList}`;
   btn.innerHTML = addIcon + "Add task";
-  btn.addEventListener("click", () => addEditDialog.openDialog(null));
+  btn.addEventListener("click", () => addEditDialog.open(null));
 
   return btn;
 }
