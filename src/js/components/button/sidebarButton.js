@@ -13,31 +13,34 @@ const createSidebarBtn = (onClick) =>
   createIconButton(sidebarIcon, "Sidebar", onClick);
 const setSidebarBtn = (btn) => (sidebarBtn = btn);
 
-const showSidebarBtn = () =>
-  createSidebarBtn(() => {
-    visibility.show(background);
-    visibility.show(sidebar);
+const showSidebar = () => {
+  visibility.show(background);
+  visibility.show(sidebar);
 
-    if (sidebarBtn) visibility.hide(sidebarBtn);
+  if (sidebarBtn) visibility.hide(sidebarBtn);
 
+  setTimeout(() => {
+    sidebar.style.transform = "translateX(0)";
     setTimeout(() => {
-      sidebar.style.transform = "translateX(0)";
-      setTimeout(() => {
-        container.style.position = "static";
-      }, 150);
-    }, 0);
-  });
+      container.style.position = "static";
+    }, 150);
+  }, 0);
+};
 
-const hideSidebarBtn = () =>
-  createSidebarBtn(() => {
-    visibility.hide(background);
-    container.style.position = "fixed";
-    sidebar.style.transform = "translateX(-100%)";
+const hideSidebar = () => {
+  visibility.hide(background);
+  container.style.position = "fixed";
+  sidebar.style.transform = "translateX(-100%)";
 
-    setTimeout(() => {
-      visibility.hide(sidebar);
-      if (sidebarBtn) visibility.show(sidebarBtn);
-    }, 300);
-  });
+  setTimeout(() => {
+    visibility.hide(sidebar);
+    if (sidebarBtn) visibility.show(sidebarBtn);
+  }, 300);
+};
+
+const showSidebarBtn = () => createSidebarBtn(showSidebar);
+const hideSidebarBtn = () => createSidebarBtn(hideSidebar);
+
+background.addEventListener("click", hideSidebar);
 
 export { showSidebarBtn, hideSidebarBtn, setSidebarBtn };
