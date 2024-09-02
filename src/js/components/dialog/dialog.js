@@ -10,6 +10,18 @@ export default class Dialog {
 
     this.cancelBtn.addEventListener("click", this.onCancel.bind(this));
     this.form.addEventListener("submit", this.onSubmit.bind(this));
+
+    this.dialog.addEventListener("click", (e) => {
+      const rect = e.target.getBoundingClientRect();
+      if (
+        rect.left > e.clientX ||
+        rect.right < e.clientX ||
+        rect.top > e.clientY ||
+        rect.bottom < e.clientY
+      ) {
+        this.dialog.close();
+      }
+    });
   }
 
   open(object = null) {
