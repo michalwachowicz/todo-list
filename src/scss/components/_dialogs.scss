@@ -71,6 +71,12 @@
         text-decoration: line-through;
       }
     }
+
+    &-description {
+      @include themify {
+        color: themed("text-secondary");
+      }
+    }
   }
 
   &::backdrop {
